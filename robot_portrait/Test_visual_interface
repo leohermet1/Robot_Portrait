@@ -1,0 +1,56 @@
+import imghdr
+from tkinter import *
+import string
+from turtle import position
+import PIL
+from PIL import Image
+from PIL import ImageTk
+
+fenetre = Tk()
+
+label = Label(fenetre, text="Hello World", width=50, height=20)
+label.pack()
+
+bouton=Button(fenetre, text="Exit", command=fenetre.quit)
+bouton.pack()
+
+label = Label(fenetre, text="Choose one picture", bg="yellow")
+label.pack()
+
+
+canvas = Canvas(fenetre, width=200, height=200, bg='red')
+#create a canva in which we can put our image
+
+image = Image.open('visage_joconde.jpg')
+image = image.resize((200, 200))
+photo = ImageTk.PhotoImage(image)
+imagesprite = canvas.create_image(100,100,image=photo)
+canvas.focus_set()
+
+def clavier(event):
+    #photochoisie[i]=1
+    #i=i+1
+    print("photo 1 choisie")
+
+canvas.bind("<Button-1>", clavier)
+canvas.pack(side=LEFT, padx=20, pady=20)
+
+
+canvas2 = Canvas(fenetre, width=200, height=200, bg='red')
+#create a canva in which we can put our image
+
+image2 = Image.open('visage_joconde.jpg')
+image2 = image2.resize((200, 200))
+photo2 = ImageTk.PhotoImage(image2)
+imagesprite2 = canvas2.create_image(100,100,image=photo2)
+canvas2.focus_set()
+
+def clavier2(event):
+    #photochoisie[i]=2
+    #i=i+1
+    print("photo 2 choisie")
+
+canvas2.bind("<Button-1>", clavier2)
+canvas2.pack(side=RIGHT, padx=20, pady=20)
+
+fenetre.mainloop()

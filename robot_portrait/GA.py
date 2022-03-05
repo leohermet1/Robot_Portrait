@@ -65,13 +65,21 @@ def crossingOver(population):#vector of vector with the selected faces
 
 # Mutation function
 def mutationFunction(population):
+    '''
+    Returns a numpy array of the vectors mutated 
+
+            Parameters:
+                    population (numpy.array) : Numpy array of vectors corresponding to the pictures that the witness chose
+
+            Returns:
+                    popToMutate (numpy.array): Numpy array of vectors who may have undergone a mutation
+    '''
+        
     #using the population that underwent CO
     #if more than 3 faces: we mutate the one that didn't undergo CO
     #if exactly 3 faces: we mutate the 3 original ones
     #maybe try to mutate in an interval for each pixel defined by the faces chosen (from the best to the worst)
     #or/and take the average
-    
-    print("in mutation")
     
     nbDePopToMute=0
     taille3=True
@@ -106,11 +114,7 @@ def mutationFunction(population):
                 popToMutate[i][j]=randrange(1,100,1)
                 print("mutation occurs")
             #elif(0.3<value<0.5):
-
-
-
-
-           
+            
     return popToMutate
 
 #to recreate a good population

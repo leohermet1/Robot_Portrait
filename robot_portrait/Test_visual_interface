@@ -8,9 +8,7 @@ from PIL import ImageTk
 
 
 fenetre = Tk()
-
-labelTitle = Label(fenetre, text="Robot Portrait group 1")
-labelTitle.grid(row=0, column=1, columnspan=3)
+fenetre.title('Robot Portrait group 1')
 
 boutonExit=Button(fenetre, text="Exit", command=fenetre.quit)
 boutonExit.grid(row=8, column=4)
@@ -18,13 +16,19 @@ boutonExit.grid(row=8, column=4)
 boutonRefresh=Button(fenetre, text="Refresh")
 boutonRefresh.grid(row=6, column=4)
 
+boutonFinish=Button(fenetre, text="Finish")
+boutonFinish.grid(row=8, column=2)
+
+boutonItsHim=Button(fenetre, text="It's Him ")
+boutonItsHim.grid(row=5, column=4)
+
 labelConsigne1 = Label(fenetre, text='Choose at least 3 photos that look like the person you saw and click on Finish.')
 labelConsigne1.grid(row=1, column=1, columnspan=3)
 
 labelConsigne2 = Label(fenetre, text='If there are less than 3, click on the refresh button to get new photos.')
 labelConsigne2.grid(row=2, column=1, columnspan=3)
 
-labelConsigne3 = Label(fenetre, text='If you see a photo that is very close, click on it s him.')
+labelConsigne3 = Label(fenetre, text="If you see a photo that is very close, click on the photo and then on It's him.")
 labelConsigne3.grid(row=3, column=1, columnspan=3)
 
 labelGauche= Label(fenetre, text="            ")

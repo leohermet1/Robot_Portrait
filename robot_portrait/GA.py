@@ -44,6 +44,15 @@ def populationCostFunction():
 
 # Crossing over 
 def crossingOver(population):#vector of vector with the selected faces
+      '''
+    Returns a numpy array of the 6 crossed vectors 
+
+            Parameters:
+                    population (numpy.array) : Numpy array of vectors corresponding to the pictures that the witness chose
+
+            Returns:
+                    new_pop (numpy.array): Numpy array of the 6 vectors that are created by crossing the 3 first vectors of the population 
+    '''
     #popInitial ordered with the faces
     #crossing over on the 3 best faces
     #returns the population that will be undergo mutation
@@ -119,6 +128,15 @@ def mutationFunction(population):
 
 #to recreate a good population
 def completePopulation(population):
+      '''
+    Returns a numpy array of the new population composed of the mutated vectors, the 6 crossed ones and potentially some other vectors from the database 
+
+            Parameters:
+                    population (numpy.array) : Numpy array of vectors corresponding to the pictures that the witness chose
+
+            Returns:
+                    populationToBeShown (numpy.array): Numpy array of "children" vectors that can be either crossed from the parents, mutated or taken from the database
+    '''
     #checks if there are 9 faces
     #if not, adds faces from the db but close to the one selected
     populationToBeShown=np.zeros((9, len(population[0])))

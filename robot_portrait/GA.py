@@ -44,7 +44,7 @@ def populationCostFunction():
 
 # Crossing over 
 def crossingOver(population):#vector of vector with the selected faces
-      '''
+    '''
     Returns a numpy array of the 6 crossed vectors 
 
             Parameters:
@@ -128,7 +128,7 @@ def mutationFunction(population):
 
 #to recreate a good population
 def completePopulation(population):
-      '''
+    '''
     Returns a numpy array of the new population composed of the mutated vectors, the 6 crossed ones and potentially some other vectors from the database 
 
             Parameters:

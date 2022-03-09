@@ -1,13 +1,6 @@
-#main
-
 from encoder import *
 from GA import *
 
-def creationPop():#inheritance
-    return 0
-
-def popInitiale():#inheritance
-    return 0
 
 def askWitness():
     #event.listener click
@@ -20,10 +13,12 @@ def main():
     
     #encode (only use of the encoder)
     picturesEncoded = encoder()
-    population=[picturesEncoded[0], picturesEncoded[1],picturesEncoded[2],picturesEncoded[3],picturesEncoded[4]]
+    popCreated = creationPop(picturesEncoded) #to take 9 random faces from the clean and reduced database
+    print(popCreated)
+    population=[popCreated[0], popCreated[1],popCreated[2],popCreated[3],popCreated[4]]
     completePop=completePopulation(population)#this willbe the input of the decoder
     decoder()
-   # creationPop(picturesEncoded)#to take 9 random faces from the clean and reduced database
+   
     #decode to show the pictures selected
     askWitness()#Visual interface 
     popInitiale()#to create our intial population

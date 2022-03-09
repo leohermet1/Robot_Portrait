@@ -57,7 +57,7 @@ def encoder():
 
 def decoder():
     decoded_imgs = autoencoder.predict(X_test)
-    n = 10  # How many faces we will display
+    n = 9  # How many faces we will display
     plt.figure(figsize=(20, 4))
     for i in range(n):
         # Display original

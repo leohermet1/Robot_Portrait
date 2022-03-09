@@ -13,22 +13,32 @@ from PIL import Image
 #pixelImageF= np.asarray(imgFemme) 
 
 # Initialisation population
-def creationPop() : 
+def creationPop(encodedVectors) : 
     #we choose at random 9 faces in the entire database 
-
-    #population = [pixelImageH,pixelImageF]
-    population =0
-
+    population=np.zeros((9,len(encodedVectors[0])))
+    index =[] 
+    for i in range (0,9): 
+        randomIndex = randint(0,len(encodedVectors))
+        if (i!=0):
+            while (randomIndex in index):
+                randomIndex = randint(0,len(encodedVectors))
+            population[i]=encodedVectors[randomIndex]
+            index.append(randomIndex) 
+        else :
+            population[i]=encodedVectors[randomIndex]
+            index.append(randomIndex)
+    
     return population
 
 def popInitiale(): 
-    popInitiale = creationPop()
+   # popInitiale = creationPop()
     #listen on what the witness clicks
     #at least 3 pictures, if he cannot select 3 pictures, there is a refresh button on which he can click to aks for new faces
     #if he takes more than 3 faces, we can ask him to rate each picture between 1 and the number of pictures
     #button ok when he is done selecting the pictures
     #button "it's him" when the witness recognizes the face
     #popInitiale=faces he chose
+    popInitiale = 0
     return popInitiale
 
 # Genome cost function (suppr)
@@ -98,7 +108,7 @@ def mutationFunction(population):
         nbDePopToMute=len(population)-3
         taille3=False
 
-    print(nbDePopToMute)
+
     popToMutate=np.zeros((nbDePopToMute, len(population[0])))
 
     if(taille3):
@@ -113,15 +123,16 @@ def mutationFunction(population):
             popToMutate[j]=population[i]
             j=j+1
 
-    #average=average(population)
-
-    for i in range (len(popToMutate)):
+    beginningMut2 = 0
+    probaMut1 = random()
+    if(probaMut1<0.3) and (nbDePopToMute>1):#if random <0.3 then the mutation appears and we need more than one vector to make a mean 
+        popToMutate[0] = np.mean(popToMutate,axis=0)
+        beginningMut2 = 1 #Thus the vector 0 will not be modified by the mutation 2  
+    for i in range (beginningMut2,len(popToMutate)):
         for j in range(len(popToMutate[0])):
             value=random()#between 0 and 1
             if(value<0.5):#if random <0.5 then the mutation appears
-                popToMutate[i][j]=randrange(1,100,1)
-            #elif(0.3<value<0.5):
-            
+                popToMutate[i][j] = uniform(1.0,100.0)            
     return popToMutate
 
 #to recreate a good population
@@ -146,7 +157,6 @@ def completePopulation(population):
         else:
             populationToBeShown[i]=mutatedPop[i-6]
 
-    print(populationToBeShown)
     return populationToBeShown
 
 # Main loop

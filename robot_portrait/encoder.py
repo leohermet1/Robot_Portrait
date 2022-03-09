@@ -1,11 +1,10 @@
 import numpy as np                   # advanced math library
 import matplotlib.pyplot as plt      # plotting routines
+import tensorflow as tf
+from tensorflow import keras
 from keras.models import Model       # Model type to be used
 from keras.layers.core import Dense, Dropout, Activation # Types of layers to be used in our model
 from keras.utils import np_utils                         # NumPy related tools
-import keras
-import tensorflow as tf
-
 
 
 from sklearn.datasets import fetch_olivetti_faces # Olivetti faces dataset
@@ -46,35 +45,33 @@ X_train = X_train.reshape(-1,64,64,1)
 X_test = X_test.reshape(-1,64,64,1)
 
 autoencoder.fit(X_train, X_train,
-                epochs=100,
+                epochs=1,#need to put 100  
                 batch_size=32,
                 shuffle=True,
                 validation_data=(X_test, X_test))
 
+def encoder():
+    encoder = keras.Model(input_img, encoded)
+    encoded_imgs = encoder.predict(X_test)
+    return encoded_imgs
 
-encoder = keras.Model(input_img, encoded)
-encoded_imgs = encoder.predict(X_test)
-plt.imshow(encoded_imgs[0])
+def decoder():
+    decoded_imgs = autoencoder.predict(X_test)
+    n = 10  # How many faces we will display
+    plt.figure(figsize=(20, 4))
+    for i in range(n):
+        # Display original
+        ax = plt.subplot(2, n, i + 1)
+        plt.imshow(X_test[i].reshape(64, 64))
+        plt.gray()
+        ax.get_xaxis().set_visible(False)
+        ax.get_yaxis().set_visible(False)
 
-
-decoded_imgs = autoencoder.predict(X_test)
-# Use Matplotlib (don't ask)
-import matplotlib.pyplot as plt
-
-n = 10  # How many faces we will display
-plt.figure(figsize=(20, 4))
-for i in range(n):
-    # Display original
-    ax = plt.subplot(2, n, i + 1)
-    plt.imshow(X_test[i].reshape(64, 64))
-    plt.gray()
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
-
-    # Display reconstruction
-    ax = plt.subplot(2, n, i + 1 + n)
-    plt.imshow(decoded_imgs[i].reshape(64, 64))
-    plt.gray()
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
-plt.show()
+        # Display reconstruction
+        ax = plt.subplot(2, n, i + 1 + n)
+        plt.imshow(decoded_imgs[i].reshape(64, 64))
+        plt.gray()
+        ax.get_xaxis().set_visible(False)
+        ax.get_yaxis().set_visible(False)
+    plt.show()
+    return 0

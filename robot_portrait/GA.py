@@ -99,7 +99,6 @@ def mutationFunction(population):
         taille3=False
 
     print(nbDePopToMute)
-    print(len(population[0]))
     popToMutate=np.zeros((nbDePopToMute, len(population[0])))
 
     if(taille3):
@@ -119,9 +118,8 @@ def mutationFunction(population):
     for i in range (len(popToMutate)):
         for j in range(len(popToMutate[0])):
             value=random()#between 0 and 1
-            if(value<0.3):#if random <0.3 then the mutation appears
+            if(value<0.5):#if random <0.5 then the mutation appears
                 popToMutate[i][j]=randrange(1,100,1)
-                print("mutation occurs")
             #elif(0.3<value<0.5):
             
     return popToMutate
@@ -148,7 +146,7 @@ def completePopulation(population):
         else:
             populationToBeShown[i]=mutatedPop[i-6]
 
-
+    print(populationToBeShown)
     return populationToBeShown
 
 # Main loop

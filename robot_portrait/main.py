@@ -1,5 +1,6 @@
 from encoder import *
 from GA import *
+from Test_visual_interface import *
 
 
 def askWitness():
@@ -13,10 +14,21 @@ def main():
     
     #encode (only use of the encoder)
     picturesEncoded = encoder()
-    popCreated = creationPop(picturesEncoded) #to take 9 random faces from the clean and reduced database
-    print(popCreated)
-    population=[popCreated[0], popCreated[1],popCreated[2],popCreated[3],popCreated[4]]
-    completePop=completePopulation(population)#this willbe the input of the decoder
+    popCreated, indexPop = creationPop(picturesEncoded) #to take 9 random faces from the clean and reduced database
+    #print(popCreated)
+    #print()
+    initialPop=visualInterface(picturesEncoded)
+    #print(initialPop)
+    population=[]
+    for i in range (len(initialPop)):
+        pos=initialPop[i]-1
+        population.append(popCreated[pos])
+    #print()
+    #print(population)
+    #print()
+    completePop=completePopulation(population, picturesEncoded, indexPop)#this willbe the input of the decoder
+    #print()
+    #print(completePop)
     decoder()
    
     #decode to show the pictures selected

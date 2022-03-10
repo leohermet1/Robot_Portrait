@@ -7,11 +7,6 @@ import math
 from math import ceil
 from PIL import Image 
 
-#imgHomme = Image.open('homme.jpg')
-#pixelImageH= np.asarray(imgHomme)
-#imgFemme = Image.open('femme.jpg')
-#pixelImageF= np.asarray(imgFemme) 
-
 # Initialisation population
 def creationPop(encodedVectors) :
     '''
@@ -31,13 +26,14 @@ def creationPop(encodedVectors) :
         if (i!=0):
             while (randomIndex in index):
                 randomIndex = randint(0,len(encodedVectors))
+            
             population[i]=encodedVectors[randomIndex]
             index.append(randomIndex) 
         else :
             population[i]=encodedVectors[randomIndex]
             index.append(randomIndex)
     
-    return population
+    return population, index
 
 def popInitiale(): 
    # popInitiale = creationPop()
@@ -50,8 +46,6 @@ def popInitiale():
     popInitiale = 0
     return popInitiale
 
-# Genome cost function (suppr)
-
 # Population costs function
 def populationCostFunction():
     #either it's only 3 pictures and then they are all at the same cost (one)
@@ -59,7 +53,6 @@ def populationCostFunction():
     costPop =0
     return costPop
 
-# Selection function (suppr: the cost relies on the witness, it doesn't need to be computed)
 
 # Crossing over 
 def crossingOver(population):#vector of vector with the selected faces
@@ -145,7 +138,7 @@ def mutationFunction(population):
     return popToMutate
 
 #to recreate a good population
-def completePopulation(population):
+def completePopulation(population, encodedVectors, index):
     '''
     Returns a numpy array of the new population composed of the mutated vectors, the 6 crossed ones and potentially some other vectors from the database 
 
@@ -160,11 +153,18 @@ def completePopulation(population):
     populationToBeShown=np.zeros((9, len(population[0])))
     crossed_pop=crossingOver(population)
     mutatedPop=mutationFunction(population)
-    for i in range(6+len(mutatedPop)):
-        if(i<6):
+    for i in range(len(populationToBeShown)):
+        if(i<len(crossed_pop)):
             populationToBeShown[i]=crossed_pop[i]
-        else:
+        elif((len(crossed_pop)<=i) and (i<(len(mutatedPop)+len(crossed_pop)))):
             populationToBeShown[i]=mutatedPop[i-6]
+        elif(i>=(len(crossed_pop)+len(mutatedPop))):
+            randomIndex = randint(0,len(encodedVectors))
+            while (randomIndex in index):
+                randomIndex = randint(0,len(encodedVectors))
+           
+            populationToBeShown[i]=encodedVectors[randomIndex]
+            index.append(randomIndex)    
 
     return populationToBeShown
 

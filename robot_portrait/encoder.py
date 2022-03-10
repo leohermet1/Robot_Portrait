@@ -45,7 +45,7 @@ X_train = X_train.reshape(-1,64,64,1)
 X_test = X_test.reshape(-1,64,64,1)
 
 autoencoder.fit(X_train, X_train,
-                epochs=1,#need to put 100  
+                epochs=10,#need to put 100  
                 batch_size=32,
                 shuffle=True,
                 validation_data=(X_test, X_test))
@@ -60,14 +60,14 @@ def decoder():
     n = 9  # How many faces we will display
     plt.figure(figsize=(20, 4))
     for i in range(n):
-        # Display original
+        #Display original
         ax = plt.subplot(2, n, i + 1)
         plt.imshow(X_test[i].reshape(64, 64))
         plt.gray()
         ax.get_xaxis().set_visible(False)
         ax.get_yaxis().set_visible(False)
 
-        # Display reconstruction
+        #Display reconstruction
         ax = plt.subplot(2, n, i + 1 + n)
         plt.imshow(decoded_imgs[i].reshape(64, 64))
         plt.gray()

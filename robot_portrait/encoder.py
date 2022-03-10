@@ -45,7 +45,7 @@ X_train = X_train.reshape(-1,64,64,1)
 X_test = X_test.reshape(-1,64,64,1)
 
 autoencoder.fit(X_train, X_train,
-                epochs=10,#need to put 100  
+                epochs=1,#need to put 100  
                 batch_size=32,
                 shuffle=True,
                 validation_data=(X_test, X_test))

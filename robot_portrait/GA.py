@@ -1,6 +1,5 @@
 # Imports
 from pickle import NONE
-import random
 from random import *
 import numpy as np
 import math
@@ -22,9 +21,11 @@ def creationPop(encodedVectors) :
     population=np.zeros((9,len(encodedVectors[0])))
     index =[] 
     for i in range (0,9): 
+        seed(0.3)
         randomIndex = randint(0,len(encodedVectors))
         if (i!=0):
             while (randomIndex in index):
+                seed(0.3)
                 randomIndex = randint(0,len(encodedVectors))
             
             population[i]=encodedVectors[randomIndex]
@@ -124,14 +125,15 @@ def mutationFunction(population):
 
             popToMutate[j]=population[i]
             j=j+1
-
     beginningMut2 = 0
+    seed(0.3)#uncomment for unitary test
     probaMut1 = random()
-    if(probaMut1<0.3) and (nbDePopToMute>1):#if random <0.3 then the mutation appears and we need more than one vector to make a mean 
+    if(probaMut1<0.99) and (nbDePopToMute>1):#if random <0.3 then the mutation appears and we need more than one vector to make a mean 
         popToMutate[0] = np.mean(popToMutate,axis=0)
         beginningMut2 = 1 #Thus the vector 0 will not be modified by the mutation 2  
     for i in range (beginningMut2,len(popToMutate)):
         for j in range(len(popToMutate[0])):
+            seed(0.3)#uncomment for unitary test
             value=random()#between 0 and 1
             if(value<0.5):#if random <0.5 then the mutation appears
                 popToMutate[i][j] = uniform(1.0,100.0)            

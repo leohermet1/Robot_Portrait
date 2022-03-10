@@ -28,7 +28,7 @@ def main():
     #print()
     completePop=completePopulation(population, picturesEncoded, indexPop)#this willbe the input of the decoder
     #print()
-    #print(completePop)
+    print(completePop)
     decoder()
    
     #decode to show the pictures selected

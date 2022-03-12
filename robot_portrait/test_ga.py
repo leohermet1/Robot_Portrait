@@ -35,22 +35,22 @@ class test_ga_class(unittest.TestCase):
         self.np.testing.assert_array_equal(result,expectedResult)       
 
 
-    """ def test_creationPop(self):
+    def test_creationPop(self):
 
             
         fakeEncodedPictures=np.zeros((20,4))
         for i in range(20):
             for j in range(4):
-                fakeEncodedPictures[i][j]=random()
+                fakeEncodedPictures[i][j]=i*j
         result1, result2=GA.creationPop(fakeEncodedPictures)
         #population=np.zeros((9, 4))
         index =[] 
-        for i in range (0,9): 
-            seed(0.3)
+        for i in range (0,9):
+            seed(0.3) 
             randomIndex = randint(0,len(fakeEncodedPictures))
             if (i!=0):
+                seed(0.3)
                 while (randomIndex in index):
-                    seed(0.3)
                     randomIndex = randint(0,len(fakeEncodedPictures))
             
                 #population[i]=fakeEncodedPictures[randomIndex]
@@ -61,6 +61,6 @@ class test_ga_class(unittest.TestCase):
             #result=[result1, result2]
             #expectedResult=[population, index]      
         self.np.testing.assert_array_equal(result2,index)
- """
+
 if __name__ == "__main__":
     unittest.main()

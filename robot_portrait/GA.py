@@ -22,11 +22,11 @@ def creationPop(encodedVectors) :
     index =[] 
     for i in range (0,9): 
         seed(0.3)
-        randomIndex = randint(0,len(encodedVectors))
+        randomIndex = randint(0,len(encodedVectors)-1)
         if (i!=0):
+            seed(0.3)
             while (randomIndex in index):
-                seed(0.3)
-                randomIndex = randint(0,len(encodedVectors))
+                randomIndex = randint(0,len(encodedVectors)-1)
             
             population[i]=encodedVectors[randomIndex]
             index.append(randomIndex) 

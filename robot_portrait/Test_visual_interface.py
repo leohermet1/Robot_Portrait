@@ -16,12 +16,39 @@ def visualInterface(encodedVectors):
     boutonExit.grid(row=8, column=4)
 
     boutonRefresh=Button(fenetre, text="Refresh", command=creationPop(encodedVectors))
+
+    """def update_img():
+        img2=ImageTk.PhotoImage(Image.open("logo.png"))
+        imagesprite1 = canvas1.create_image(100,100,image=img2)
+        imagesprite2 = canvas2.create_image(100,100,image=img2)
+        imagesprite3 = canvas3.create_image(100,100,image=img2)
+        imagesprite4 = canvas4.create_image(100,100,image=img2)
+        imagesprite5 = canvas5.create_image(100,100,image=img2)
+        imagesprite6 = canvas6.create_image(100,100,image=img2)
+        imagesprite7 = canvas7.create_image(100,100,image=img2)
+        imagesprite8 = canvas8.create_image(100,100,image=img2)
+        imagesprite9 = canvas9.create_image(100,100,image=img2)
+
+    boutonRefresh.bind("<Button-1>", update_img)"""
+    
     boutonRefresh.grid(row=6, column=4)
 
     boutonFinish=Button(fenetre, text="Finish")
+    boutonFinish.focus_set()
+
+    def lancerGA(event):
+        print("finish")
+
+    boutonFinish.bind("<Button-1>", lancerGA)
     boutonFinish.grid(row=8, column=2)
 
-    boutonItsHim=Button(fenetre, text="It's Him ")
+    boutonItsHim=Button(fenetre, text="It's Him/her/them ")
+
+    def found(event):
+        print("found him/her/them")
+
+    boutonItsHim.bind("<Button-1>", found)
+
     boutonItsHim.grid(row=5, column=4)
 
     labelConsigne1 = Label(fenetre, text='Choose at least 3 photos that look like the person you saw and click on Finish.')
@@ -41,7 +68,32 @@ def visualInterface(encodedVectors):
 
     choosenPictures=[]
 
+    
+
+
     ####### Image 1
+    """def createCanvas1(img):
+        canvas1 = Canvas(fenetre, width=200, height=200)
+        #create a canva in which we can put our image
+        image1 = Image.open(img)
+        image1 = image1.resize((200, 200))
+        photo1 = ImageTk.PhotoImage(image1)
+        imagesprite1 = canvas1.create_image(100,100,image=photo1)
+        canvas1.focus_set()
+
+        def clavier(event):
+            #photochoisie[i]=1
+            #i=i+1
+            print("photo 1 choisie")
+            if(1 not in choosenPictures):
+                choosenPictures.append(1)
+
+        canvas1.bind("<Button-1>", clavier)
+        #canvas1.pack(side=LEFT, padx=20, pady=20)
+        canvas1.grid(row=5, column=1)
+        return 0"""
+
+
     canvas1 = Canvas(fenetre, width=200, height=200)
     #create a canva in which we can put our image
     image1 = Image.open('visage_joconde.jpg')
@@ -64,7 +116,6 @@ def visualInterface(encodedVectors):
     ####### Image 2
     canvas2 = Canvas(fenetre, width=200, height=200, )
     #create a canva in which we can put our image
-
     image2 = Image.open('visage_joconde.jpg')
     image2 = image2.resize((200, 200))
     photo2 = ImageTk.PhotoImage(image2)
@@ -99,7 +150,7 @@ def visualInterface(encodedVectors):
         print("photo 3 choisie")
         if(3 not in choosenPictures):
             choosenPictures.append(3)
-
+    
     canvas3.bind("<Button-1>", clavier3)
     #canvas3.pack(side=RIGHT, padx=20, pady=20)
     canvas3.grid(row=5, column=3)
@@ -123,7 +174,7 @@ def visualInterface(encodedVectors):
 
     canvas4.bind("<Button-1>", clavier4)
     canvas4.grid(row=6, column=1)
-
+ 
     ####### Image 5
     canvas5 = Canvas(fenetre, width=200, height=200)
     #create a canva in which we can put our image
@@ -218,6 +269,9 @@ def visualInterface(encodedVectors):
 
     canvas9.bind("<Button-1>", clavier9)
     canvas9.grid(row=7, column=3)
+
+    
+    #createCanvas1('visage_joconde.jpg')
 
     fenetre.resizable(False, False)
     

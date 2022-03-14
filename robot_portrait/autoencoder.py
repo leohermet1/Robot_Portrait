@@ -48,6 +48,7 @@ def show_celebA_data(X, n=10, title=""):
         ax.get_xaxis().set_visible(False)
         ax.get_yaxis().set_visible(False)
     plt.suptitle(title, fontsize = 20)
+    plt.show()
 
 show_celebA_data(celebA, title="celebA")
 
@@ -107,10 +108,16 @@ def show_data(X, n=10, height=28, width=28, title=""):
         ax.get_xaxis().set_visible(False)
         ax.get_yaxis().set_visible(False)
     plt.suptitle(title, fontsize = 20)
+    plt.show()
 
 
 encoded.shape
 
-show_celebA_data(X_test, title="original")
-show_data(encoded, height=32, width=64, title="encoded")
-show_celebA_data(reconstructed, title="reconstructed")
+#show_celebA_data(X_test, title="original")
+#show_data(encoded, height=32, width=64, title="encoded")
+#show_celebA_data(reconstructed, title="reconstructed")
+
+if __name__ == "__main__":
+    show_celebA_data(X_test, title="original")
+    show_data(encoded, height=32, width=64, title="encoded")
+    show_celebA_data(reconstructed, title="reconstructed")

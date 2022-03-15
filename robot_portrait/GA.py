@@ -1,4 +1,5 @@
 # Imports
+from base64 import encode
 from pickle import NONE
 from random import *
 import numpy as np
@@ -7,7 +8,7 @@ from math import ceil
 from PIL import Image 
 
 # Initialisation population
-def creationPop(encodedVectors) :
+def creationPop(encodedVectors, choosenSeed) :
     '''
     Returns a numpy array of the 9 random vectors among which the witness will have to choose the first time
 
@@ -19,12 +20,22 @@ def creationPop(encodedVectors) :
     '''
     #we choose at random 9 faces in the entire database 
     population=np.zeros((9,len(encodedVectors[0])))
+    print()
+    print("len(encodedVectors[0]")
+    print(len(encodedVectors[0]))
+    print()
+    print()
+    print("len(encodedVectors")
+    print(len(encodedVectors))
+    print()
     index =[] 
+
     for i in range (0,9): 
-        seed(0.3)
+        seed(choosenSeed)
         randomIndex = randint(0,len(encodedVectors)-1)
+        print(randomIndex)
         if (i!=0):
-            seed(0.3)
+            seed(choosenSeed)
             while (randomIndex in index):
                 randomIndex = randint(0,len(encodedVectors)-1)
             
@@ -86,7 +97,7 @@ def crossingOver(population):#vector of vector with the selected faces
     return new_pop
 
 # Mutation function
-def mutationFunction(population):
+def mutationFunction(population, choosenSeed):
     '''
     Returns a numpy array of the vectors mutated 
 
@@ -126,21 +137,21 @@ def mutationFunction(population):
             popToMutate[j]=population[i]
             j=j+1
     beginningMut2 = 0
-    seed(0.3)#uncomment for unitary test
+    seed(choosenSeed)#uncomment for unitary test
     probaMut1 = random()
     if(probaMut1<0.99) and (nbDePopToMute>1):#if random <0.3 then the mutation appears and we need more than one vector to make a mean 
         popToMutate[0] = np.mean(popToMutate,axis=0)
         beginningMut2 = 1 #Thus the vector 0 will not be modified by the mutation 2  
     for i in range (beginningMut2,len(popToMutate)):
         for j in range(len(popToMutate[0])):
-            seed(0.3)#uncomment for unitary test
+            seed(choosenSeed)#uncomment for unitary test
             value=random()#between 0 and 1
             if(value<0.5):#if random <0.5 then the mutation appears
                 popToMutate[i][j] = uniform(1.0,100.0)            
     return popToMutate
 
 #to recreate a good population
-def completePopulation(population, encodedVectors, index):
+def completePopulation(population, encodedVectors, index, randomSeed):
     '''
     Returns a numpy array of the new population composed of the mutated vectors, the 6 crossed ones and potentially some other vectors from the database 
 
@@ -154,16 +165,16 @@ def completePopulation(population, encodedVectors, index):
     #if not, adds faces from the db but close to the one selected
     populationToBeShown=np.zeros((9, len(population[0])))
     crossed_pop=crossingOver(population)
-    mutatedPop=mutationFunction(population)
+    mutatedPop=mutationFunction(population, randomSeed)
     for i in range(len(populationToBeShown)):
         if(i<len(crossed_pop)):
             populationToBeShown[i]=crossed_pop[i]
         elif((len(crossed_pop)<=i) and (i<(len(mutatedPop)+len(crossed_pop)))):
             populationToBeShown[i]=mutatedPop[i-6]
         elif(i>=(len(crossed_pop)+len(mutatedPop))):
-            randomIndex = randint(0,len(encodedVectors))
+            randomIndex = randint(0,len(encodedVectors)-1)
             while (randomIndex in index):
-                randomIndex = randint(0,len(encodedVectors))
+                randomIndex = randint(0,len(encodedVectors)-1)
            
             populationToBeShown[i]=encodedVectors[randomIndex]
             index.append(randomIndex)    
@@ -183,6 +194,7 @@ def main_genetic_algorithm ():
     #crossed_pop=crossingOver(population)
     #mutatedPop=mutationFunction(population)
 
+    randomseed=random()
     popFinale=completePopulation(population)
 
     for i in range (len(popFinale)):

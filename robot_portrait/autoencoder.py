@@ -55,8 +55,8 @@ show_celebA_data(celebA, title="celebA")
 
 
 X_train, X_test = train_test_split(celebA,
-                                   test_size=0.2,
-                                   random_state=0)
+                                    test_size=0.2,
+                                    random_state=0)
 
 
 input_layer = Input(shape=(128, 128, 3), name="INPUT")
@@ -87,17 +87,19 @@ X_AE.fit(X_train, X_train,
                 batch_size=32,
                 shuffle=True,
                 validation_data=(X_test, X_test))
-
-
 X_AE.save("X_AE.h5")
 
-get_encoded_X = Model(inputs=X_AE.input, outputs=X_AE.get_layer("CODE").output)
+def encoder():
+    get_encoded_X = Model(inputs=X_AE.input, outputs=X_AE.get_layer("CODE").output)
 
-encoded = get_encoded_X.predict(X_test)
-encoded = encoded.reshape((len(X_test), 16*16*8))
-encoded.shape
+    encoded = get_encoded_X.predict(X_test)
+    encoded = encoded.reshape((len(X_test), 16*16*8))
+    encoded.shape
 
-reconstructed = X_AE.predict(X_test)
+    reconstructed = X_AE.predict(X_test)
+    return encoded, reconstructed
+
+encoded, reconstructed=encoder()
 
 def show_data(X, n=10, height=28, width=28, title=""):
     plt.figure(figsize=(10, 3))
@@ -118,6 +120,10 @@ encoded.shape
 #show_celebA_data(reconstructed, title="reconstructed")
 
 if __name__ == "__main__":
+    print()
+    print("len de encoded = ")
+    print(len(encoded))
+    print()
     show_celebA_data(X_test, title="original")
     show_data(encoded, height=32, width=64, title="encoded")
     show_celebA_data(reconstructed, title="reconstructed")

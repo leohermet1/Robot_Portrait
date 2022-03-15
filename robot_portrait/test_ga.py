@@ -21,7 +21,7 @@ class test_ga_class(unittest.TestCase):
         expectedResult[2]=population[2]
 
         seed(0.3)
-        result=GA.mutationFunction(population)
+        result=GA.mutationFunction(population, 0.3)
               
         probaMut1 = random()
         if(probaMut1<0.99):
@@ -42,7 +42,7 @@ class test_ga_class(unittest.TestCase):
         for i in range(20):
             for j in range(4):
                 fakeEncodedPictures[i][j]=i*j
-        result1, result2=GA.creationPop(fakeEncodedPictures)
+        result1, result2=GA.creationPop(fakeEncodedPictures, 0.3)
         #population=np.zeros((9, 4))
         index =[] 
         for i in range (0,9):

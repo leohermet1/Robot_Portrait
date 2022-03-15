@@ -1,4 +1,4 @@
-from encoder import *
+from autoencoder import *
 from GA import *
 from Test_visual_interface import *
 
@@ -13,27 +13,24 @@ def main():
     numberMaxOfGen=10
     
     #encode (only use of the encoder)
-    picturesEncoded = encoder()
-    popCreated, indexPop = creationPop(picturesEncoded) #to take 9 random faces from the clean and reduced database
-    #print(popCreated)
-    #print()
-    initialPop=visualInterface(picturesEncoded)
-    #print(initialPop)
+    picturesEncoded, picturesReconstructed = encoder()
+    randomseed=random()
+    popCreated , indexPop = creationPop(picturesEncoded, randomseed) #to take 9 random faces from the clean and reduced database
+
+    initialPop=visualInterface(picturesEncoded)#peut être gérer si jamais on ne sélectionne aucune image
+
     population=[]
     for i in range (len(initialPop)):
         pos=initialPop[i]-1
         population.append(popCreated[pos])
-    #print()
-    #print(population)
-    #print()
-    completePop=completePopulation(population, picturesEncoded, indexPop)#this willbe the input of the decoder
-    #print()
-    print(completePop)
-    decoder()
+
+    completePop=completePopulation(population, picturesEncoded, indexPop, randomseed)#this willbe the input of the decoder
+
+    #decoder()
    
     #decode to show the pictures selected
-    askWitness()#Visual interface 
-    popInitiale()#to create our intial population
+    askWitness()#launch Visual interface 
+    #popInitiale()#to create our intial population
     
 
    # for numberOfGen in range(0, numberMaxOfGen):

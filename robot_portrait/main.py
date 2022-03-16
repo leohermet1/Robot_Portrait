@@ -19,6 +19,11 @@ def main():
 
     initialPop=visualInterface(picturesEncoded)#peut être gérer si jamais on ne sélectionne aucune image
 
+    print()
+    print("pop initiale")
+    print(initialPop)
+    print()
+
     population=[]
     for i in range (len(initialPop)):
         pos=initialPop[i]-1

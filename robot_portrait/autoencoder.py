@@ -50,7 +50,7 @@ def show_celebA_data(X, n=10, title=""):
     plt.suptitle(title, fontsize = 20)
     plt.show()
 
-show_celebA_data(celebA, title="celebA")
+#show_celebA_data(celebA, title="celebA")
 
 
 

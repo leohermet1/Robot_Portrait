@@ -14,7 +14,7 @@ import tensorflow as tf
 from sklearn.model_selection import train_test_split
 
 
-!unzip celebA_test.zip
+#!unzip celebA_test.zip
 
 def load_images_from_folder(celebA_test):
   images = [ ]
@@ -105,7 +105,7 @@ X_AE.summary()
 
 
 X_AE.fit(X_train, X_train,
-                epochs=30,
+                epochs=3, #put 30 or more
                 batch_size=32,
                 shuffle=True,
                 validation_data=(X_test, X_test))
@@ -134,25 +134,21 @@ def show_data(X, n=10, height=28, width=28, title=""):
     plt.suptitle(title, fontsize = 20)
     plt.show()
 
+def decoder(encodedPictures):
+    encodedPictures.shape
 
-encoded.shape
+    encodedRS = encodedPictures.reshape((len(X_test),16,16,8))
+    encodedRS.shape
 
-encodedRS = encoded.reshape((len(X_test),16,16,8))
-encodedRS.shape
+    decoded = X_d.predict(encodedRS)
+    return decoded
 
-decoded = X_d.predict(encodedRS)
-
-
-show_celebA_data(X_test, title="original")
-show_data(encoded, height=32, width=64, title="encoded")
-show_celebA_data(decoded, title="reconstructed")
+#show_celebA_data(X_test, title="original")
+#show_data(encoded, height=32, width=64, title="encoded")
+#show_celebA_data(decoded, title="reconstructed")
 
 
 if __name__ == "__main__":
-    print()
-    print("len de encoded = ")
-    print(len(encoded))
-    print()
     show_celebA_data(X_test, title="original")
     show_data(encoded, height=32, width=64, title="encoded")
     show_celebA_data(decoded, title="reconstructed")

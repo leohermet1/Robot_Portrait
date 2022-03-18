@@ -1,4 +1,4 @@
-from autoencoder import *
+from auto_encoder_celeb import *
 from GA import *
 from Test_visual_interface import *
 
@@ -13,7 +13,7 @@ def main():
     numberMaxOfGen=10
     
     #encode (only use of the encoder)
-    picturesEncoded, picturesReconstructed = encoder()
+    picturesEncoded, picturesReconstructed = auto_encoder()
     randomseed=random()
     popCreated , indexPop = creationPop(picturesEncoded, randomseed) #to take 9 random faces from the clean and reduced database
 
@@ -29,10 +29,11 @@ def main():
         pos=initialPop[i]-1
         population.append(popCreated[pos])
 
-    completePop=completePopulation(population, picturesEncoded, indexPop, randomseed)#this willbe the input of the decoder
+    completePop=completePopulation(population, picturesEncoded, indexPop, randomseed) # this will be the input of the decoder
 
     #decoder()
-   
+    decodedPictures = decoder(completePop)
+    show_celebA_data(decodedPictures, title="reconstructed")
     #decode to show the pictures selected
     askWitness()#launch Visual interface 
     #popInitiale()#to create our intial population

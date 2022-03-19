@@ -3,6 +3,7 @@ from auto_encoder import *
 from GA import *
 from Test_visual_interface import *
 from PIL import Image as im
+import os
 
 
 def askWitness():
@@ -32,8 +33,16 @@ def main():
 
     print(decodedPictures)
 
-   #peut être moyen de tout mettre dans une boucle  
-    image0 = im.fromarray(np.uint8(decodedPictures[0]))
+   
+
+    #os.mkdir("C:\\Users\\mario\\Documents\\GitHub\\Robot_Portrait\\robot_portrait\\ImageUpdated")
+
+    #peut être moyen de tout mettre dans une boucle
+    for i in range (len(decodedPictures)):
+        image = im.fromarray(np.uint8(decodedPictures[i]))
+        image.save("ImageUpdated\image" +str(i)+ ".jpg")
+
+    """image0 = im.fromarray(np.uint8(decodedPictures[0]))
     image0.save("ImageUpdated/image0.jpg")
     image1 = im.fromarray(np.uint8(decodedPictures[1]))
     image1.save("ImageUpdated/image1.jpg")
@@ -50,11 +59,11 @@ def main():
     image7 = im.fromarray(np.uint8(decodedPictures[7]))
     image7.save("ImageUpdated/image7.jpg")
     image8 = im.fromarray(np.uint8(decodedPictures[8]))
-    image8.save("ImageUpdated/image8.jpg")
+    image8.save("ImageUpdated/image8.jpg")"""
 
 
    #removing all pictures, peut être moyen aussi de mettre dans une boucle 
-    os.remove("ImageUpdated/image0.jpg")
+    """os.remove("ImageUpdated/image0.jpg")
     os.remove("ImageUpdated/image1.jpg")
     os.remove("ImageUpdated/image2.jpg")
     os.remove("ImageUpdated/image3.jpg")
@@ -62,7 +71,7 @@ def main():
     os.remove("ImageUpdated/image5.jpg")
     os.remove("ImageUpdated/image6.jpg")
     os.remove("ImageUpdated/image7.jpg")
-    os.remove("ImageUpdated/image8.jpg")
+    os.remove("ImageUpdated/image8.jpg")"""
 
 
 

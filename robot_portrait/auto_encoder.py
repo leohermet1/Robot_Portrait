@@ -9,7 +9,7 @@ import tensorflow as tf
 from sklearn.model_selection import train_test_split
 
 #unzip pictures
-!unzip celebA_test.zip
+#!unzip celebA_test.zip
 
 #Get the pictures as np.array
 celebA_path = "celebA_test/"
@@ -70,7 +70,7 @@ X_AE.compile(optimizer='adam', loss='mse')
 
 #train the model
 X_AE.fit(X_train, X_train,
-                epochs=50,
+                epochs=5,
                 batch_size=32,
                 shuffle=True,
                 validation_data=(X_test, X_test))

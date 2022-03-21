@@ -8,6 +8,15 @@ decoder = keras.models.load_model('data/decoder.h5')
 encoded = np.load("data/encoded.npy")
 
 def decoderFunction(encodedRS):
+    '''
+    Returns the decoded pictures with the decoder model
+
+            Parameters:
+                    encodedRS (numpy.array) : Numpy array of the modified vectors after genetic algorithm
+
+            Returns:
+                    decoded (numpy.array) : Numpy array of the decoded pictures
+    '''
     #reshape the encoded vector from (9,2048) to (100,16,16,8)
     encodedRS = encodedRS.reshape((len(encodedRS),16,16,8))
     #decode the encoded vector using the load model

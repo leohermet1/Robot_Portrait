@@ -7,14 +7,16 @@ import PIL
 from PIL import Image
 from PIL import ImageTk
 from GA import *
+import decoder
+from PIL import Image as im
+import keras
 
 
-def visualInterface(encodedVectors):
+def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomseed):
 
     fenetre = Tk()
     fenetre.title('Robot Portrait group 1')
     fenetre.configure(bg="white")
-
     
 
     boutonExit=Button(fenetre, text="Exit", command=fenetre.quit, bg="#B5EAD7")
@@ -45,30 +47,82 @@ def visualInterface(encodedVectors):
     boutonFinish=Button(fenetre, text="Finish", bg="#B5EAD7")
     #when we click on this button it should check that there is 3 pictures that are selected
     #if not: alert message
-
-
+    imageToShow2=[]
+    def FunctionimageToShow2(imageToShow2):
+        for i in range(9):
+            image=Image.open("ImageUpdated\image"+str(i)+".jpg")
+            image.resize((200, 200))
+            photo=ImageTk.PhotoImage(image)
+            #imageToShow2[i]=photo
+            imageToShow2.append(photo)
+    
     def lancerGA(event):
         if(len(choosenPictures)<3):
             messagebox.showinfo('Warning', "You need to choose at least 3 pictures. If you can't, click on refresh")
         print("finish")
         if(len(choosenPictures)>=3):
-            imageToShow=[]
             messagebox.showinfo('Info', "Computation in progress")
-            for i in range(9):
-                image=Image.open("ImageUpdated\image"+str(i)+".jpg")
-                image.resize((200, 200))
-                photo=ImageTk.PhotoImage(image)
-                imageToShow.append(photo)
-            canvas1.itemconfig(imagesprite1,image = imageToShow[0])#"vangogh.jpg"
-            canvas2.itemconfig(imagesprite2,image = imageToShow[1])
-            canvas3.itemconfig(imagesprite3,image = imageToShow[2])
-            canvas4.itemconfig(imagesprite4,image = imageToShow[3])
-            canvas5.itemconfig(imagesprite5,image = imageToShow[4])
-            canvas6.itemconfig(imagesprite6,image = imageToShow[5])
-            canvas7.itemconfig(imagesprite7,image = imageToShow[6])
-            canvas8.itemconfig(imagesprite8,image = imageToShow[7])
-            canvas9.itemconfig(imagesprite9,image = imageToShow[8])
+            population=[]
+            for i in range (len(choosenPictures)):
+                if(len(popCreated)!=0):
+                    print("len avant delete")
+                    print(len(popCreated))
+                    print()
+                    pos = choosenPictures[i]-1
+                    population.append(popCreated[pos])
+                    print("dans le if")
+                else:
+                    pos = choosenPictures[i]-1
+                    population.append(completePop[pos])
+                    print("dans le else")
+
+            for i in range(len(popCreated)):
+                for j in range(len(popCreated[i])):
+                    np.delete(popCreated[i][j], 0)
+            
+            print()
+            print("len après delete")
+            print(len(popCreated))
+
+            completePop=completePopulation(population, encodedVectors, indexPop, randomseed) # this will be the input of the decoder
+
+            decodedPictures = decoder.decoderFunction(completePop, decoderModel)
+
+            for i in range (len(decodedPictures)):
+                image = im.fromarray(np.uint8(decodedPictures[i]))
+                image.save("ImageUpdated\image" +str(i)+ ".jpg")
+            
             choosenPictures.clear()
+
+            FunctionimageToShow2(imageToShow2)
+
+            canvas1.itemconfig(imagesprite1,image = imageToShow2[0])
+
+            ####### Image 2
+            canvas2.itemconfig(imagesprite2,image = imageToShow2[1])
+
+            ####### Image 3
+            canvas3.itemconfig(imagesprite3,image = imageToShow2[2])
+
+            ####### Image 4
+            canvas4.itemconfig(imagesprite4,image = imageToShow2[3])
+        
+            ####### Image 5
+            canvas5.itemconfig(imagesprite5,image = imageToShow2[4])
+
+            ####### Image 6
+            canvas6.itemconfig(imagesprite6,image = imageToShow2[5])
+
+            ####### Image 7
+            canvas7.itemconfig(imagesprite7,image = imageToShow2[6])
+
+            ####### Image 8
+            canvas8.itemconfig(imagesprite8,image = imageToShow2[7])
+
+            ####### Image 9
+            canvas9.itemconfig(imagesprite9,image = imageToShow2[8])
+
+    
     boutonFinish.bind("<Button-1>", lancerGA)
     boutonFinish.grid(row=8, column=2)
 
@@ -80,7 +134,7 @@ def visualInterface(encodedVectors):
         elif(len(choosenPictures)>1):
             messagebox.showinfo('Warning', "You choose more that one picture, try again")
             choosenPictures.clear()
-        else:
+        else:  
             print("found him/her/them")
             fenetre2 = Toplevel()
             fenetre2.title("It's him/her/them")
@@ -95,7 +149,7 @@ def visualInterface(encodedVectors):
             canvas = Canvas(fenetre2, width=400, height=400, bg="white")
             
             #create a canva in which we can put our image
-            imageItsHim = Image.open("joker.jpg")#choosenPictures[len(choosenPictures)-1]
+            imageItsHim = Image.open("ImageUpdated\image"+str(choosenPictures[0]-1)+".jpg")#choosenPictures[len(choosenPictures)-1]
             imageItsHim = imageItsHim.resize((400, 400))
             photoItsHim = ImageTk.PhotoImage(imageItsHim)
 
@@ -140,13 +194,13 @@ def visualInterface(encodedVectors):
     ####### Image 1
     imageToShow=[]
     for i in range(9):
-        image=Image.open("ImageUpdated\image"+str(i)+".jpg")
+        image=Image.open("ImageBeginning\image"+str(i)+".jpg")
         image.resize((200, 200))
         photo=ImageTk.PhotoImage(image)
         imageToShow.append(photo)         
         
         
-
+    
     image1update = Image.open('vangogh.jpg')
     image1update = image1update.resize((200, 200))
     photo1update = ImageTk.PhotoImage(image1update)
@@ -159,16 +213,14 @@ def visualInterface(encodedVectors):
     #create a canva in which we can put our image
     imagesprite1 = canvas1.create_image(100,100,image=imageToShow[0])
     def clavier(event):
-            #photochoisie[i]=1
-            #i=i+1
-            print("photo"+str(i)+ "choisie")
-            if(i not in choosenPictures):
-                choosenPictures.append(i)
+            print("photo 1 choisie")
+            if(1 not in choosenPictures):
+                choosenPictures.append(1)
     canvas1.bind("<Button-1>", clavier)
     canvas1.grid(row=5, column=1)
 
     ####### Image 2
-    canvas2 = Canvas(fenetre, width=200, height=200, )
+    canvas2 = Canvas(fenetre, width=200, height=200)
     #create a canva in which we can put our image
     imagesprite2 = canvas2.create_image(100,100,image=imageToShow[1])
     def clavier2(event):
@@ -180,7 +232,7 @@ def visualInterface(encodedVectors):
 
 
     ####### Image 3
-    canvas3 = Canvas(fenetre, width=200, height=200, )
+    canvas3 = Canvas(fenetre, width=200, height=200)
     #create a canva in which we can put our image
     imagesprite3 = canvas3.create_image(100,100,image=imageToShow[2])
     def clavier3(event):
@@ -191,7 +243,7 @@ def visualInterface(encodedVectors):
     canvas3.grid(row=5, column=3)
 
     ####### Image 4
-    canvas4 = Canvas(fenetre, width=200, height=200 )
+    canvas4 = Canvas(fenetre, width=200, height=200)
     #create a canva in which we can put our image
     imagesprite4 = canvas4.create_image(100,100,image=imageToShow[3])
     def clavier4(event):
@@ -261,6 +313,6 @@ def visualInterface(encodedVectors):
     
     fenetre.mainloop()
 
-    return choosenPictures
+    return 0
 
 

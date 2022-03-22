@@ -139,14 +139,14 @@ def mutationFunction(population, choosenSeed):
     beginningMut2 = 0
     seed(choosenSeed)#uncomment for unitary test
     probaMut1 = random()
-    if(probaMut1<0.99) and (nbDePopToMute>1):#if random <0.3 then the mutation appears and we need more than one vector to make a mean 
+    if(probaMut1<0.7) and (nbDePopToMute>1):#if random <0.3 then the mutation appears and we need more than one vector to make a mean 
         popToMutate[0] = np.mean(popToMutate,axis=0)
         beginningMut2 = 1 #Thus the vector 0 will not be modified by the mutation 2  
     for i in range (beginningMut2,len(popToMutate)):
         for j in range(len(popToMutate[0])):
             seed(choosenSeed)#uncomment for unitary test
             value=random()#between 0 and 1
-            if(value<0.5):#if random <0.5 then the mutation appears
+            if(value<0.7):#if random <0.5 then the mutation appears
                 popToMutate[i][j] = uniform(1.0,100.0)            
     return popToMutate
 

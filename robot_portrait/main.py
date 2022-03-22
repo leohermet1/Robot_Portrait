@@ -1,9 +1,12 @@
 import decoder 
-from auto_encoder import *
+#from auto_encoder import *
 from GA import *
 from Test_visual_interface import *
 from PIL import Image as im
 import os
+import tensorflow as tf
+import keras
+import numpy as np
 
 
 def askWitness():
@@ -12,35 +15,47 @@ def askWitness():
 
 def main():
     
+
+    #load the model
+    decoderModel = keras.models.load_model('data/decoder.h5')
+    #load the encoded vector (numpy.ndarray format)
+    picturesEncoded = np.load("data/encoded.npy")
     numberOfGen=0
     numberMaxOfGen=10
     
     #encode (only use of the encoder)
-    picturesEncoded = decoder.encoded
+    #picturesEncoded = decoder.encoded
     randomseed=random()
-    popCreated , indexPop = creationPop(picturesEncoded, randomseed) #to take 9 random faces from the clean and reduced database
+    popCreated, indexPop = creationPop(picturesEncoded, randomseed) #to take 9 random faces from the clean and reduced database
 
-    initialPop=visualInterface(picturesEncoded)#peut être gérer si jamais on ne sélectionne aucune image
+    popCreatedDecoded = decoder.decoderFunction(popCreated, decoderModel)
 
-    population=[]
+    for i in range (len(popCreatedDecoded)):
+        image = im.fromarray(np.uint8(popCreatedDecoded[i]))
+        image.save("ImageBeginning\image" +str(i)+ ".jpg")
+
+    #initialPop=
+    visualInterface(picturesEncoded, decoderModel, popCreated, indexPop, randomseed)#peut être gérer si jamais on ne sélectionne aucune image
+
+    """population=[]
     for i in range (len(initialPop)):
         pos=initialPop[i]-1
         population.append(popCreated[pos])
 
     completePop=completePopulation(population, picturesEncoded, indexPop, randomseed) # this will be the input of the decoder
 
-    decodedPictures = decoder.decoderFunction(completePop)
+    decodedPictures = decoder.decoderFunction(completePop, decoderModel)
 
-    print(decodedPictures)
+    print(decodedPictures)"""
 
    
 
     #os.mkdir("C:\\Users\\mario\\Documents\\GitHub\\Robot_Portrait\\robot_portrait\\ImageUpdated")
 
     #peut être moyen de tout mettre dans une boucle
-    for i in range (len(decodedPictures)):
+    """for i in range (len(decodedPictures)):
         image = im.fromarray(np.uint8(decodedPictures[i]))
-        image.save("ImageUpdated\image" +str(i)+ ".jpg")
+        image.save("ImageUpdated\image" +str(i)+ ".jpg")"""
 
     """image0 = im.fromarray(np.uint8(decodedPictures[0]))
     image0.save("ImageUpdated/image0.jpg")

@@ -17,7 +17,7 @@ def decoderFunction(encodedRS):
             Returns:
                     decoded (numpy.array) : Numpy array of the decoded pictures
     '''
-    #reshape the encoded vector from (9,2048) to (100,16,16,8)
+    #reshape the encoded vector from (9,2048) to (9,16,16,8)
     encodedRS = encodedRS.reshape((len(encodedRS),16,16,8))
     #decode the encoded vector using the load model
     decoded = decoder.predict(encodedRS)

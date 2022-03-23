@@ -116,6 +116,18 @@ def mutationFunction(population, choosenSeed):
     
     nbDePopToMute=0
     taille3=True
+
+    #determining range for mutation
+    def mutationRange(population, j):
+        value=[]
+        for i in population:
+            value.append(i[j])
+
+        maximum=max(value)
+        minimum=min(value)
+        return maximum, minimum
+
+
     if(len(population)==3):
         nbDePopToMute=3
     else:
@@ -133,21 +145,22 @@ def mutationFunction(population, choosenSeed):
     else:
         j=0
         for i in range (3, 3 + nbDePopToMute):
-
             popToMutate[j]=population[i]
+    
             j=j+1
     beginningMut2 = 0
     seed(choosenSeed)#uncomment for unitary test
     probaMut1 = random()
-    if(probaMut1<0.7) and (nbDePopToMute>1):#if random <0.3 then the mutation appears and we need more than one vector to make a mean 
+    if(probaMut1<0.7) and (nbDePopToMute>1):#if random <0.7 then the mutation appears and we need more than one vector to make a mean 
         popToMutate[0] = np.mean(popToMutate,axis=0)
         beginningMut2 = 1 #Thus the vector 0 will not be modified by the mutation 2  
     for i in range (beginningMut2,len(popToMutate)):
         for j in range(len(popToMutate[0])):
             seed(choosenSeed)#uncomment for unitary test
             value=random()#between 0 and 1
-            if(value<0.7):#if random <0.5 then the mutation appears
-                popToMutate[i][j] = uniform(1.0,100.0)            
+            if(value<0.5):#if random <0.5 then the mutation appears
+                maximum, minimum = mutationRange(population, j)
+                popToMutate[i][j] = uniform(minimum,maximum)            
     return popToMutate
 
 #to recreate a good population

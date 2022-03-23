@@ -3,9 +3,9 @@ import keras
 import numpy as np
 
 #load the model
-decoder = keras.models.load_model('data/decoder.h5')
+decoder = keras.models.load_model('decoder.h5')
 #load the encoded vector (numpy.ndarray format)
-encoded = np.load("data/encoded.npy")
+encoded = np.load("encoded.npy")
 
 def decoderFunction(encodedRS):
     '''

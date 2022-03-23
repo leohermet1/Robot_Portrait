@@ -10,9 +10,11 @@ from GA import *
 import decoder
 from PIL import Image as im
 import keras
+from keras.preprocessing import image as imK
 
 
-def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomseed):
+
+def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomseed, booleanUsed):
 
     fenetre = Tk()
     fenetre.title('Robot Portrait group 1')
@@ -57,6 +59,9 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
             imageToShow2.append(photo)
     
     def lancerGA(event):
+        
+        #global booleanUsed
+        
         if(len(choosenPictures)<3):
             messagebox.showinfo('Warning', "You need to choose at least 3 pictures. If you can't, click on refresh")
         print("finish")
@@ -64,9 +69,10 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
             messagebox.showinfo('Info', "Computation in progress")
             population=[]
             for i in range (len(choosenPictures)):
+                #if(booleanUsed==FALSE):
                 if(len(popCreated)!=0):
                     print("len avant delete")
-                    print(len(popCreated))
+                    print(popCreated[0])
                     print()
                     pos = choosenPictures[i]-1
                     population.append(popCreated[pos])
@@ -76,20 +82,27 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
                     population.append(completePop[pos])
                     print("dans le else")
 
-            for i in range(len(popCreated)):
-                for j in range(len(popCreated[i])):
-                    np.delete(popCreated[i][j], 0)
+            #np.delete(popCreated,1, axis=0)
+            #booleanUsed=TRUE    
+            """for i in range(len(popCreated)):
+                print("in delete")
+                popCreated[i]=np.delete(popCreated[i], list(range(0,2048,1)), axis=0)"""
+
+            
             
             print()
             print("len après delete")
             print(len(popCreated))
+
+            print("population")
+            print(population[0])
 
             completePop=completePopulation(population, encodedVectors, indexPop, randomseed) # this will be the input of the decoder
 
             decodedPictures = decoder.decoderFunction(completePop, decoderModel)
 
             for i in range (len(decodedPictures)):
-                image = im.fromarray(np.uint8(decodedPictures[i]))
+                image = imK.array_to_img(decodedPictures[i])
                 image.save("ImageUpdated\image" +str(i)+ ".jpg")
             
             choosenPictures.clear()

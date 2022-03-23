@@ -7,6 +7,7 @@ import os
 import tensorflow as tf
 import keras
 import numpy as np
+from keras.preprocessing import image as imK
 
 
 def askWitness():
@@ -17,9 +18,9 @@ def main():
     
 
     #load the model
-    decoderModel = keras.models.load_model('data/decoder.h5')
+    decoderModel = keras.models.load_model('decoder.h5')
     #load the encoded vector (numpy.ndarray format)
-    picturesEncoded = np.load("data/encoded.npy")
+    picturesEncoded = np.load("encoded.npy")
     numberOfGen=0
     numberMaxOfGen=10
     
@@ -27,15 +28,18 @@ def main():
     #picturesEncoded = decoder.encoded
     randomseed=random()
     popCreated, indexPop = creationPop(picturesEncoded, randomseed) #to take 9 random faces from the clean and reduced database
-
+    print("popCreated")
+    print(popCreated)
+    print()
     popCreatedDecoded = decoder.decoderFunction(popCreated, decoderModel)
 
     for i in range (len(popCreatedDecoded)):
-        image = im.fromarray(np.uint8(popCreatedDecoded[i]))
+        image = imK.array_to_img(popCreatedDecoded[i])#im.fromarray
         image.save("ImageBeginning\image" +str(i)+ ".jpg")
 
     #initialPop=
-    visualInterface(picturesEncoded, decoderModel, popCreated, indexPop, randomseed)#peut être gérer si jamais on ne sélectionne aucune image
+    booleanUsed=FALSE
+    visualInterface(picturesEncoded, decoderModel, popCreated, indexPop, randomseed, booleanUsed)#peut être gérer si jamais on ne sélectionne aucune image
 
     """population=[]
     for i in range (len(initialPop)):

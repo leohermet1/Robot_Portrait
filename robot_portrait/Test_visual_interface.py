@@ -14,7 +14,7 @@ from keras.preprocessing import image as imK
 
 
 
-def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomseed, booleanUsed):
+def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomseed):
 
     fenetre = Tk()
     fenetre.title('Robot Portrait group 1')
@@ -58,6 +58,19 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
             #imageToShow2[i]=photo
             imageToShow2.append(photo)
     
+    popCreatedUsed=[1,1]
+    def CreationPopUsed(popCreatedUsed):
+        if(popCreatedUsed[1]==0):
+            return TRUE#utilisée
+        else:
+            return FALSE#pas encore utilisée
+
+    #trying to solve the error => local variable 'completePop' referenced before assignment
+    completePop=np.zeros((9, len(encodedVectors[0])))
+    def defineCompletePop(population, encodedVectors, indexPop, randomseed, completePop):
+        completePop=completePopulation(population, encodedVectors, indexPop, randomseed)
+        return completePop
+    
     def lancerGA(event):
         
         #global booleanUsed
@@ -67,10 +80,12 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
         print("finish")
         if(len(choosenPictures)>=3):
             messagebox.showinfo('Info', "Computation in progress")
+            print("pop created")
+            print(popCreatedUsed)
             population=[]
             for i in range (len(choosenPictures)):
-                #if(booleanUsed==FALSE):
-                if(len(popCreated)!=0):
+                if(CreationPopUsed(popCreatedUsed)==FALSE):
+                #if(len(popCreated)!=0):
                     print("len avant delete")
                     print(popCreated[0])
                     print()
@@ -78,12 +93,17 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
                     population.append(popCreated[pos])
                     print("dans le if")
                 else:
+                    print("completePop")
+                    print(completePop)
+                    print("dans le else")
                     pos = choosenPictures[i]-1
                     population.append(completePop[pos])
-                    print("dans le else")
+                    
 
             #np.delete(popCreated,1, axis=0)
-            #booleanUsed=TRUE    
+            popCreatedUsed[1]=0 
+            print("popcreated après changement")
+            print(popCreatedUsed)   
             """for i in range(len(popCreated)):
                 print("in delete")
                 popCreated[i]=np.delete(popCreated[i], list(range(0,2048,1)), axis=0)"""
@@ -97,8 +117,9 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
             print("population")
             print(population[0])
 
-            completePop=completePopulation(population, encodedVectors, indexPop, randomseed) # this will be the input of the decoder
-
+            completePop=defineCompletePop(population, encodedVectors, indexPop, randomseed, completePop) # this will be the input of the decoder
+            print("completePop")
+            print(completePop)
             decodedPictures = decoder.decoderFunction(completePop, decoderModel)
 
             for i in range (len(decodedPictures)):
@@ -134,8 +155,9 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
 
             ####### Image 9
             canvas9.itemconfig(imagesprite9,image = imageToShow2[8])
-
     
+        return popCreatedUsed
+
     boutonFinish.bind("<Button-1>", lancerGA)
     boutonFinish.grid(row=8, column=2)
 

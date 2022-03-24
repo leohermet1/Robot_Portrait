@@ -7,7 +7,7 @@ decoder = keras.models.load_model('decoder.h5')
 #load the encoded vector (numpy.ndarray format)
 encoded = np.load("encoded.npy")
 
-def decoderFunction(encodedRS):
+def decoderFunction(encodedRS, decoderModel):
     '''
     Returns the decoded pictures with the decoder model
 

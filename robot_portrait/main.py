@@ -38,8 +38,8 @@ def main():
         image.save("ImageBeginning\image" +str(i)+ ".jpg")
 
     #initialPop=
-    booleanUsed=FALSE
-    visualInterface(picturesEncoded, decoderModel, popCreated, indexPop, randomseed, booleanUsed)#peut être gérer si jamais on ne sélectionne aucune image
+    #popCreatedUsed=[1, 1]#1 means false
+    visualInterface(picturesEncoded, decoderModel, popCreated, indexPop, randomseed)#peut être gérer si jamais on ne sélectionne aucune image
 
     """population=[]
     for i in range (len(initialPop)):

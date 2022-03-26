@@ -126,7 +126,7 @@ def train_autoencoder_model(X_train,X_test):
                     X_AE (model) : trained autoencoder(decoder is trained automatically within the training of autoencoder)
     '''
     X_AE.fit(X_train, X_train,
-                    epochs=5,
+                    epochs=30,
                     batch_size=32,
                     shuffle=True,
                     validation_data=(X_test, X_test))

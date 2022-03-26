@@ -66,10 +66,13 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
             return FALSE#pas encore utilisée
 
     #trying to solve the error => local variable 'completePop' referenced before assignment
-    completePop=np.zeros((9, len(encodedVectors[0])))
+    completePop=[]
     def defineCompletePop(population, encodedVectors, indexPop, randomseed, completePop):
-        completePop=completePopulation(population, encodedVectors, indexPop, randomseed)
-        return completePop
+        completePop.clear()
+        completePop.append(completePopulation(population, encodedVectors, indexPop, randomseed))
+        print("complete pop initialisation")
+        print(completePop)
+    
     
     def lancerGA(event):
         
@@ -97,19 +100,16 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
                     print(completePop)
                     print("dans le else")
                     pos = choosenPictures[i]-1
-                    population.append(completePop[pos])
+                    
+                    population.append(np.array(completePop[0][pos]))
                     
 
-            #np.delete(popCreated,1, axis=0)
             popCreatedUsed[1]=0 
             print("popcreated après changement")
             print(popCreatedUsed)   
-            """for i in range(len(popCreated)):
-                print("in delete")
-                popCreated[i]=np.delete(popCreated[i], list(range(0,2048,1)), axis=0)"""
 
-            
-            
+
+
             print()
             print("len après delete")
             print(len(popCreated))
@@ -117,15 +117,25 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
             print("population")
             print(population[0])
 
-            completePop=defineCompletePop(population, encodedVectors, indexPop, randomseed, completePop) # this will be the input of the decoder
-            print("completePop")
+            defineCompletePop(population, encodedVectors, indexPop, randomseed, completePop) # this will be the input of the decoder
+            print("completePop in lancer GA")
             print(completePop)
-            decodedPictures = decoder.decoderFunction(completePop, decoderModel)
+            completePopArray=np.array(completePop)
+            print("complete pop as array")
+            print(completePopArray)
+            print("len complete pop array [0]")
+            print(len(completePopArray[0]))
+            print("len complete pop array [0][0]")
+            print(len(completePopArray[0][0]))
+
+
+            decodedPictures = decoder.decoderFunction(completePopArray[0], decoderModel)
 
             for i in range (len(decodedPictures)):
                 image = imK.array_to_img(decodedPictures[i])
                 image.save("ImageUpdated\image" +str(i)+ ".jpg")
-            
+                print("saving pictures")
+            #for now it doesn't change the pictures
             choosenPictures.clear()
 
             FunctionimageToShow2(imageToShow2)

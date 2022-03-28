@@ -12,7 +12,7 @@ def creationPop(encodedVectors, choosenSeed) :
     Returns a numpy array of the 9 random vectors among which the witness will have to choose the first time
 
             Parameters:
-                    encodedVectors (numpy.array) : Numpy array of vectors corresponding to the encoded pictures from the databse
+                    encodedVectors (numpy.array) : Numpy array of vectors corresponding to the encoded pictures from the database
 
             Returns:
                     population (numpy.array): Numpy array of the 9 random vectors that are will be displayed to the witness for the first choice 

@@ -32,7 +32,7 @@ def get_pictures(file_str):
     celebA = np.array(celebA)
     return celebA
 
-celebA = get_pictures("celebA_test/")
+celebA = get_pictures("/Users/lidanlin/Downloads/Projet_4BIM/Robot_Portrait/robot_portrait/celebA_10000/")
 
 
 

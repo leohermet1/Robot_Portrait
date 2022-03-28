@@ -2,7 +2,7 @@
 
 DEPENDENCIES:
 
-+ 'pip3 install' tkinter
++ `pip3 install tkinter`
 + 'pip3 install' turtle
 + 'pip3 install' PIL (or pillow)
 + 'pip3 install' keras

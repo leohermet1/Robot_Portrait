@@ -3,7 +3,6 @@ from base64 import encode
 from pickle import NONE
 from random import *
 import numpy as np
-import math
 from math import ceil
 from PIL import Image 
 
@@ -20,14 +19,6 @@ def creationPop(encodedVectors, choosenSeed) :
     '''
     #we choose at random 9 faces in the entire database 
     population=np.zeros((9,len(encodedVectors[0])))
-    print()
-    print("len(encodedVectors[0]")
-    print(len(encodedVectors[0]))
-    print()
-    print()
-    print("len(encodedVectors")
-    print(len(encodedVectors))
-    print()
     index =[] 
 
     for i in range (0,9): 
@@ -47,25 +38,6 @@ def creationPop(encodedVectors, choosenSeed) :
     
     return population, index
 
-def popInitiale(): 
-   # popInitiale = creationPop()
-    #listen on what the witness clicks
-    #at least 3 pictures, if he cannot select 3 pictures, there is a refresh button on which he can click to aks for new faces
-    #if he takes more than 3 faces, we can ask him to rate each picture between 1 and the number of pictures
-    #button ok when he is done selecting the pictures
-    #button "it's him" when the witness recognizes the face
-    #popInitiale=faces he chose
-    popInitiale = 0
-    return popInitiale
-
-# Population costs function
-def populationCostFunction():
-    #either it's only 3 pictures and then they are all at the same cost (one)
-    #or it's ordered with the grades
-    costPop =0
-    return costPop
-
-
 # Crossing over 
 def crossingOver(population):#vector of vector with the selected faces
     '''
@@ -77,11 +49,6 @@ def crossingOver(population):#vector of vector with the selected faces
             Returns:
                     new_pop (numpy.array): Numpy array of the 6 vectors that are created by crossing the 3 first vectors of the population 
     '''
-    #popInitial ordered with the faces
-    #crossing over on the 3 best faces
-    #returns the population that will be undergo mutation
-    #if exactly 3 faces: the returned population is composed of the crossed faces and of the original ones
-    #if more, only the crossed one and the others (less good)
 
     taille=len(population[0])
     half=math.ceil(taille/2)
@@ -107,12 +74,6 @@ def mutationFunction(population, choosenSeed):
             Returns:
                     popToMutate (numpy.array): Numpy array of vectors who may have undergone a mutation
     '''
-        
-    #using the population that underwent CO
-    #if more than 3 faces: we mutate the one that didn't undergo CO
-    #if exactly 3 faces: we mutate the 3 original ones
-    #maybe try to mutate in an interval for each pixel defined by the faces chosen (from the best to the worst)
-    #or/and take the average
     
     nbDePopToMute=0
     taille3=True
@@ -193,28 +154,3 @@ def completePopulation(population, encodedVectors, index, randomSeed):
             index.append(randomIndex)    
 
     return populationToBeShown
-
-# Main loop
-
-#creationPop() #data 9 faces at random
-#popInitiale() #reduced database with the faces choosen by the witness
-
-
-def main_genetic_algorithm ():
-
-    population=[[0, 1, 2, 3, 4, 5, 6,7], [7,6, 5, 4, 3, 2, 1, 0], [6,7, 8, 9, 10, 11, 12, 0], [0, 3, 5, 7, 9, 11, 13, 15]] 
-    
-    #crossed_pop=crossingOver(population)
-    #mutatedPop=mutationFunction(population)
-
-    randomseed=random()
-    popFinale=completePopulation(population)
-
-    for i in range (len(popFinale)):
-        for j in range (len(popFinale[i])):
-            print(popFinale[i][j])
-        print()
-
-    #mutationFunction() 
-if __name__=="__main__":
-    main_genetic_algorithm()  

@@ -1,21 +1,25 @@
-import imghdr
 from tkinter import *
 from tkinter import messagebox
-import string
 from turtle import bgcolor, position
-import PIL
 from PIL import Image
 from PIL import ImageTk
+from PIL import Image as im
 from GA import *
 import decoder
-from PIL import Image as im
-import keras
 from keras.preprocessing import image as imK
 
 
-
 def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomseed):
-
+    '''
+    This function permits to define a dynamic graphical interface and to show it. 
+            Parameters:
+                    encodedVectors (numpy.array) : Numpy array of vectors corresponding to the encoded pictures from the database
+                    decoderModel (keras model) : Model previously trained to decode images 
+                    popCreated (numpy.array) : Numpy array of vectors corresponding to the 9 encoded pictures choosen from the database at random
+                    indexPop (numpy.array) : Numpy array of values corresponding to the index of the images choosen from the database
+                    randomseed (float) : Float number to fix a seed for random numbers in order to be reproductible for the unitary test
+            Returns:         
+    '''
     fenetre = Tk()
     fenetre.title('Robot Portrait group 1')
     fenetre.configure(bg="white")
@@ -35,9 +39,15 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
     labelDessusPhoto= Label(fenetre, text="            ", bg="white")
     labelDessusPhoto.grid(row=4, column=0)
 
-    #to create the population that is created at the beginning and to update it in case of refresh
+    
     popCreatedInside=[]
     def popCreatedInsideFunction(popCreatedGiven):
+    '''
+    This function permits to create the population that is created at the beginning and to update it in case of refresh
+            Parameters:
+                    popCreatedGiven (numpy.array) : Numpy array of vectors corresponding to the encoded pictures
+            Returns:             
+    '''
         popCreatedInside.clear()
         for i in range(len(popCreatedGiven)):
             popCreatedInside.append(popCreatedGiven[i]) 
@@ -51,10 +61,18 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
 
     popCreatedUsed=[1,1]
     def CreationPopUsed(popCreatedUsed):
+    '''
+    This function permits to know if the initial population was already use or not, usefull at the beginning and at each call of the refresh button
+            Parameters:
+                    popCreatedUsed (numpy.array) : Numpy array of vectors corresponding to the encoded pictures
+            Returns: 
+                    boolean value depending of the case 
+
+    '''
         if(popCreatedUsed[1]==0):
-            return TRUE#used
+            return TRUE #used
         else:
-            return FALSE#not used yet
+            return FALSE #not used yet
 
 
     imageRefresh=[]
@@ -316,5 +334,3 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
     fenetre.mainloop()
 
     return 0
-
-

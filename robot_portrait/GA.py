@@ -3,6 +3,7 @@ from base64 import encode
 from pickle import NONE
 from random import *
 import numpy as np
+import math
 from math import ceil
 from PIL import Image 
 
@@ -24,12 +25,10 @@ def creationPop(encodedVectors, choosenSeed) :
     for i in range (0,9): 
         seed(choosenSeed)
         randomIndex = randint(0,len(encodedVectors)-1)
-        print(randomIndex)
         if (i!=0):
             seed(choosenSeed)
             while (randomIndex in index):
                 randomIndex = randint(0,len(encodedVectors)-1)
-            
             population[i]=encodedVectors[randomIndex]
             index.append(randomIndex) 
         else :
@@ -78,8 +77,18 @@ def mutationFunction(population, choosenSeed):
     nbDePopToMute=0
     taille3=True
 
-    #determining range for mutation
+    #Determining range for mutation
     def mutationRange(population, j):
+        '''
+        Returns the maximum and the minimum of the vecteur "population" in order to make the mutation in this interval
+            Parameters:
+                    population (numpy.array) : Numpy array of vectors corresponding to the pictures that the witness chose
+                    j (int) : Position of the value we need to mutate
+
+            Returns:
+                   maximum (float): THe maximum value of the vector 
+                   minimum (float): THe minimum value of the vector 
+        '''
         value=[]
         for i in population:
             value.append(i[j])
@@ -121,7 +130,7 @@ def mutationFunction(population, choosenSeed):
             value=random()#between 0 and 1
             if(value<0.5):#if random <0.5 then the mutation appears
                 maximum, minimum = mutationRange(population, j)
-                popToMutate[i][j] = uniform(minimum,maximum)            
+                popToMutate[i][j] = uniform(minimum,maximum)#the random number is chosen from the previously calculated interval          
     return popToMutate
 
 #to recreate a good population

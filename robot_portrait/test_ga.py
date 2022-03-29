@@ -8,12 +8,24 @@ class test_ga_class(unittest.TestCase):
     import numpy as np
 
     def test_crossingOver(self):
+        '''
+        This function tests the function crossing over 
+                Parameters:
+                        self 
+                Returns:         
+        '''
         population = [[0, 1, 2, 3], [4, 5, 6, 7],[8, 9, 10, 11]] 
         result = GA.crossingOver(population)
         expectedResult = np.array([[0, 1, 6, 7], [4, 5, 2, 3],[4, 5, 10, 11], [8, 9, 6, 7],[0, 1, 10, 11], [8, 9, 2, 3]])
         self.np.testing.assert_array_equal(result,expectedResult)
 
     def test_mutation(self):
+        '''
+        This function tests the function mutation
+                Parameters:
+                        self 
+                Returns:         
+        '''
         population = [[0, 1, 2, 3], [4, 5, 6, 7],[8, 9, 10, 11]]
         expectedResult=np.zeros((3, 4))
         expectedResult[0]=population[0]
@@ -36,7 +48,12 @@ class test_ga_class(unittest.TestCase):
 
 
     def test_creationPop(self):
-
+        '''
+        This function tests the function croeationPop
+                Parameters:
+                        self 
+                Returns:         
+        '''
             
         fakeEncodedPictures=np.zeros((20,4))
         for i in range(20):

@@ -169,7 +169,7 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
         completePop.clear()
         completePop.append(completePopulation(population, encodedVectors, indexPop, randomseed))
     
-    
+
     def launchGA(event):
         '''
         This function permits to launch the genetic algorithm
@@ -177,7 +177,6 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
                         event : Action collected when the button is clicked
                 Returns:         
         '''
-        
         if(len(choosenPictures)<3):
             messagebox.showinfo('Warning', "You need to choose at least 3 pictures. If you can't, click on refresh")
         if(len(choosenPictures)>=3):
@@ -191,7 +190,6 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
                     pos = choosenPictures[i]-1
                     population.append(np.array(completePop[0][pos]))
                     
-
             popCreatedUsed[1]=0 #to say that we used popCreated
 
             defineCompletePop(population, encodedVectors, indexPop, randomseed, completePop) # to complete the population
@@ -217,6 +215,7 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
             canvas7.itemconfig(imagesprite7,image = imageToShow2[6])
             canvas8.itemconfig(imagesprite8,image = imageToShow2[7])
             canvas9.itemconfig(imagesprite9,image = imageToShow2[8])
+           
 
 
     boutonFinish.bind("<Button-1>", launchGA)
@@ -249,11 +248,11 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
             
             #create a canva in which we can put our image
             if(CreationPopUsed(popCreatedUsed)==FALSE):#if the suspect is found just after the refresh
-                imageSuspect = Image.open("ImageBeginning\image"+str(choosenPictures[0]-1)+".jpg")#choosenPictures[len(choosenPictures)-1]
+                imageSuspect = Image.open("ImageBeginning\image"+str(choosenPictures[0]-1)+".jpg")
                 imageSuspect = imageSuspect.resize((400, 400))
                 photoSuspect = ImageTk.PhotoImage(imageSuspect)
             else:#if the suspect is found just after the GA
-                imageSuspect = Image.open("ImageUpdated\image"+str(choosenPictures[0]-1)+".jpg")#choosenPictures[len(choosenPictures)-1]
+                imageSuspect = Image.open("ImageUpdated\image"+str(choosenPictures[0]-1)+".jpg")
                 imageSuspect = imageSuspect.resize((400, 400))
                 photoSuspect = ImageTk.PhotoImage(imageSuspect)
 

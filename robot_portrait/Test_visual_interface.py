@@ -54,11 +54,6 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
 
     popCreatedInsideFunction(popCreated)#to initialize it to the popCreated we give at the very beginning
 
-    #########################################################
-    ################### Exit button ######################
-    #########################################################
-    boutonExit=Button(window, text="Exit", command=window.quit, bg="#B5EAD7")
-    boutonExit.grid(row=8, column=4)
 
     popCreatedUsed=[1,1]
 

@@ -1,0 +1,8 @@
+site_name: Robot Portrait Group 1
+site_url: https://robot_portait_group_1.com/
+
+nav:
+  - Home: index.md
+  - GA: GA.md
+  - autoencoder: autoencoder.md
+theme: readthedocs

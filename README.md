@@ -1,12 +1,12 @@
 # Robot_Portrait
 
-##Description
+## Description
 This software helps you to identify a person with his face characteristics using the dataset celebA.
 
-##Version
+## Version
 1.0.0
 
-##Installation
+## Installation
 Before trying to run this software ;
 
 $ git clone https://github.com/leohermet1/Robot_Portrait.git
@@ -32,6 +32,7 @@ $ python3 main.py
 #### auto_encoder
 If you want to re-train the model, you can run the auto_encoder.py with this code:
 $ python3 auto_encoder.py
+In this code you can modify the number of epochs at the line 129.
 
-##Authors
+## Authors
 Beugin Maëva, Dufeu Marion, Cho Chaeeun, Hermet Léo, Li Danlin, Jimenez Juan

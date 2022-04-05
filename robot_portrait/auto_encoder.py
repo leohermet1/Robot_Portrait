@@ -59,7 +59,7 @@ X_train, X_test = creat_train_data(celebA)
 #definition of the model
 def get_models():
     '''
-    Returns the autoencoder and dercoder model (dercoder model with the same layers with that of autoencoder)
+    Returns the autoencoder and decoder model (dercoder model with the same layers with that of autoencoder)
 
             Parameters:
                     No parameters

@@ -82,21 +82,53 @@
                 <h1 id="autoencoder">autoencoder</h1>
 <h2 id="functions">functions</h2>
 <ul>
-<li>
-<p><code>get_pictures</code> - Returns a numpy array of the pixels of all the pictures. 
-Takes as parameters:</p>
+<li><code>get_pictures</code> - Returns a numpy array of the pixels of all the pictures.</li>
+</ul>
+<p>Takes as parameters:</p>
+<pre><code>- file_str(string) : String of the directory towards the file containing all the celebA pictures
+</code></pre>
+<p>Returns:</p>
+<pre><code>- celebA (numpy.array): Numpy array of the pixels of each picture in the file
+</code></pre>
 <ul>
-<li>file_str(string) : String of the directory towards the file containing all the celebA pictures</li>
+<li><code>creat_train_data</code> - Returns the training part and the testing part of data of the pictures which will be used to train the model after.</li>
 </ul>
-</li>
-<li>
-<p><code>creat_train_data</code> - Returns the training part and the testing part of data of the pictures which will be used to train the model after.
-Takes as parameters:</p>
+<p>Takes as parameters:</p>
+<pre><code>- celebA (numpy.array) : Numpy array of the pixels of each picture in the file.
+</code></pre>
+<p>Returns:</p>
+<pre><code>- X_train (numpy.array): Numpy array of the pictures of the training part
+- X_test (numpy.array): Numpy array of the pictures of the testing part
+</code></pre>
 <ul>
-<li>celebA (numpy.array) : Numpy array of the pixels of each picture in the file.</li>
+<li><code>get_models</code> - Returns the autoencoder and decoder model (dercoder model with the same layers with that of autoencoder)</li>
 </ul>
-</li>
+<p>Takes as parameters:</p>
+<pre><code>- None
+</code></pre>
+<p>Returns:</p>
+<pre><code>- X_d ,X_AE (model) : autoencoder and decoder model
+</code></pre>
+<ul>
+<li><code>train_autoencoder_model</code> - Returns the trained autoencoder with our pictures</li>
 </ul>
+<p>Takes as parameters:</p>
+<pre><code>- X_train (numpy.array) : Numpy array of the pictures of the training part
+- X_test(numpy.array) : Numpy array of the pictures of the testing part
+</code></pre>
+<p>Returns:</p>
+<pre><code>- X_AE (model) : trained autoencoder (decoder is trained automatically within the training of autoencoder)
+</code></pre>
+<ul>
+<li><code>auto_encoder</code> - Returns the encoded pictures and the decoded pictures with the models</li>
+</ul>
+<p>Takes as parameters:</p>
+<pre><code>- None
+</code></pre>
+<p>Returns:</p>
+<pre><code>- encoded(numpy.array) : Numpy array of the pixels of the encoded pictures  
+- reconstructed(numpy.array) : Numpy array of the pixels of the decoded pictures
+</code></pre>
               
             </div>
           </div><footer>

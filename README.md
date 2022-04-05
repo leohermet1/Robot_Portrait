@@ -27,7 +27,7 @@ DEPENDENCIES:
 + `pip3 install pickle`
 + `pip3 install random`
 
-$ python3 decoder.py
+$ python3 main.py
 
 #### auto_encoder
 If you want to re-train the model, you can run the auto_encoder.py with this code:

@@ -29,7 +29,7 @@ DEPENDENCIES:
 
 $ python3 main.py
 
-#### auto_encoder
+### auto_encoder
 If you want to re-train the model, you can run the auto_encoder.py with this code:
 $ python3 auto_encoder.py
 In this code you can modify the number of epochs at the line 129.

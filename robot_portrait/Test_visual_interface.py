@@ -1,6 +1,6 @@
-from tkinter import *
-from tkinter import messagebox
-from turtle import bgcolor, position
+from tkinter import * 
+from tkinter import messagebox 
+#from turtle import bgcolor, position
 from PIL import Image
 from PIL import ImageTk
 from PIL import Image as im
@@ -63,7 +63,7 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
                 Parameters:
                         popCreatedUsed (numpy.array) : Numpy array of vectors corresponding to the encoded pictures
                 Returns: 
-                        boolean value depending of the case 
+                        boolean value depending on the case 
 
         '''
         if(popCreatedUsed[1]==0):

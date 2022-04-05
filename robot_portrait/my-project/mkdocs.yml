@@ -5,4 +5,5 @@ nav:
   - Home: index.md
   - GA: GA.md
   - autoencoder: autoencoder.md
+  - visualInterface: Test_visual_interface.md
 theme: readthedocs

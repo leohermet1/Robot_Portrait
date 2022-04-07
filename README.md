@@ -44,7 +44,7 @@ gzip -d celebA_10000.zip (The datasets of pictures)
 python3 main.py
 ```
 
-### auto_encoder
+## auto_encoder
 If you want to re-train the model, you can run the auto_encoder.py with this code:
 ```
 python3 auto_encoder.py

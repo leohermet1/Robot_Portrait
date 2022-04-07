@@ -14,6 +14,8 @@ git clone https://github.com/leohermet1/Robot_Portrait.git
 ### To use Python Virtual Environment
 ```
 cd Robot_Portrait/
+#install Python virtualenv
+pip3 install pipenv
 # Activate Python virtualenv
 pipenv shell
 pipenv install -r ./requirements.txt

@@ -1,6 +1,6 @@
 from tkinter import * 
-from tkinter import messagebox 
-#from turtle import bgcolor, position
+from tkinter import messagebox
+from turtle import fillcolor 
 from PIL import Image
 from PIL import ImageTk
 from PIL import Image as im
@@ -23,6 +23,7 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
     window = Tk()
     window.title('Robot Portrait group 1')
     window.configure(bg="white")
+    window.geometry('750x750')
     
     labelConsigne1 = Label(window, text='Choose at least 3 photos that look like the person you saw and click on Finish.', bg="white")
     labelConsigne1.grid(row=1, column=1, columnspan=3)
@@ -114,6 +115,16 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
                 Returns:         
         '''
         refreshFunction(encodedVectors)
+        canvas1["bg"]="white"
+        canvas2["bg"]="white"
+        canvas3["bg"]="white"
+        canvas4["bg"]="white"
+        canvas5["bg"]="white"
+        canvas6["bg"]="white"
+        canvas7["bg"]="white"
+        canvas8["bg"]="white"
+        canvas9["bg"]="white"
+
 
         canvas1.itemconfig(imagesprite1,image = imageRefresh[0])
         canvas2.itemconfig(imagesprite2,image = imageRefresh[1])
@@ -204,7 +215,15 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
             choosenPictures.clear()
 
             FunctionimageToShow2(imageToShow2)
-
+            canvas1["bg"]="white"
+            canvas2["bg"]="white"
+            canvas3["bg"]="white"
+            canvas4["bg"]="white"
+            canvas5["bg"]="white"
+            canvas6["bg"]="white"
+            canvas7["bg"]="white"
+            canvas8["bg"]="white"
+            canvas9["bg"]="white"
             #updating the canvas
             canvas1.itemconfig(imagesprite1,image = imageToShow2[0])
             canvas2.itemconfig(imagesprite2,image = imageToShow2[1])
@@ -219,7 +238,7 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
 
 
     boutonFinish.bind("<Button-1>", launchGA)
-    boutonFinish.grid(row=8, column=2)
+    boutonFinish.grid(row=7, column=4)
 
     #########################################################
     ################### Suspect button ######################
@@ -228,6 +247,15 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
     boutonSuspect=Button(window, text="It's the suspect ", bg="#B5EAD7")
 
     def found(event):
+        canvas1["bg"]="white"
+        canvas2["bg"]="white"
+        canvas3["bg"]="white"
+        canvas4["bg"]="white"
+        canvas5["bg"]="white"
+        canvas6["bg"]="white"
+        canvas7["bg"]="white"
+        canvas8["bg"]="white"
+        canvas9["bg"]="white"
         if(len(choosenPictures)==0):
             messagebox.showinfo('Warning', "You need to choose 1 picture.")
         elif(len(choosenPictures)>1):
@@ -283,86 +311,97 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
         photo=ImageTk.PhotoImage(image)
         imageToShow.append(photo)         
 
-    canvas1 = Canvas(window, width=200, height=200)
+    canvas1 = Canvas(window, width=200, height=200, bg="white")
     #create a canva in which we can put our image
     imagesprite1 = canvas1.create_image(100,100,image=imageToShow[0])
     def clavier(event):
             if(1 not in choosenPictures):
                 choosenPictures.append(1)
+                #canvas1.focus()
+                canvas1["bg"]="#B5EAD7"
     canvas1.bind("<Button-1>", clavier)
     canvas1.grid(row=5, column=1)
 
     ####### Image 2
-    canvas2 = Canvas(window, width=200, height=200)
+    canvas2 = Canvas(window, width=200, height=200, bg="white")
     imagesprite2 = canvas2.create_image(100,100,image=imageToShow[1])
+    canvas2.focus()
     def clavier2(event):
         if(2 not in choosenPictures):
             choosenPictures.append(2)
+            canvas2["bg"]="#B5EAD7"
     canvas2.bind("<Button-1>", clavier2)
     canvas2.grid(row=5, column=2)
 
 
     ####### Image 3
-    canvas3 = Canvas(window, width=200, height=200)
+    canvas3 = Canvas(window, width=200, height=200, bg="white")
     imagesprite3 = canvas3.create_image(100,100,image=imageToShow[2])
     def clavier3(event):
         if(3 not in choosenPictures):
             choosenPictures.append(3)
+            canvas3["bg"]="#B5EAD7"
     canvas3.bind("<Button-1>", clavier3)
     canvas3.grid(row=5, column=3)
 
     ####### Image 4
-    canvas4 = Canvas(window, width=200, height=200)
+    canvas4 = Canvas(window, width=200, height=200, bg="white")
     imagesprite4 = canvas4.create_image(100,100,image=imageToShow[3])
     def clavier4(event):
         if(4 not in choosenPictures):
             choosenPictures.append(4)
+            canvas4["bg"]="#B5EAD7"
     canvas4.bind("<Button-1>", clavier4)
     canvas4.grid(row=6, column=1)
  
     ####### Image 5
-    canvas5 = Canvas(window, width=200, height=200)
+    canvas5 = Canvas(window, width=200, height=200, bg="white")
     imagesprite5 = canvas5.create_image(100,100,image=imageToShow[4])
     def clavier5(event):
         if(5 not in choosenPictures):
             choosenPictures.append(5)
+            canvas5["bg"]="#B5EAD7"
     canvas5.bind("<Button-1>", clavier5)
     canvas5.grid(row=6, column=2)
 
 
     ####### Image 6
-    canvas6 = Canvas(window, width=200, height=200)
+    canvas6 = Canvas(window, width=200, height=200, bg="white")
     imagesprite6 = canvas6.create_image(100,100,image=imageToShow[5])
     def clavier6(event):
         if(6 not in choosenPictures):
             choosenPictures.append(6)
+            canvas6["bg"]="#B5EAD7"
     canvas6.bind("<Button-1>", clavier6)
     canvas6.grid(row=6, column=3)
 
     ####### Image 7
-    canvas7 = Canvas(window, width=200, height=200)
+    canvas7 = Canvas(window, width=200, height=200, bg="white")
     imagesprite7 = canvas7.create_image(100,100,image=imageToShow[6])       
     def clavier7(event):
         if(7 not in choosenPictures):
             choosenPictures.append(7)
+            canvas7["bg"]="#B5EAD7"
     canvas7.bind("<Button-1>", clavier7)
     canvas7.grid(row=7, column=1)
 
     ####### Image 8
-    canvas8 = Canvas(window, width=200, height=200)
+    canvas8 = Canvas(window, width=200, height=200, bg="white")
     imagesprite8 = canvas8.create_image(100,100,image=imageToShow[7])       
     def clavier8(event):
         if(8 not in choosenPictures):
             choosenPictures.append(8)
+            canvas8["bg"]="#B5EAD7"
     canvas8.bind("<Button-1>", clavier8)
     canvas8.grid(row=7, column=2)
 
     ####### Image 9
-    canvas9 = Canvas(window, width=200, height=200)
+    canvas9 = Canvas(window, width=200, height=200, bg="white")
     imagesprite9 = canvas9.create_image(100,100,image=imageToShow[8])          
     def clavier9(event):
         if(9 not in choosenPictures):
             choosenPictures.append(9)
+            canvas9["bg"]="#B5EAD7"
     canvas9.bind("<Button-1>", clavier9)
     canvas9.grid(row=7, column=3)
 

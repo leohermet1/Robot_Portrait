@@ -45,6 +45,7 @@ python3 main.py
 In order to train the model proposed here we used : 
   - 10000 pictures from the celebA dataset https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html 
   - 50 epochs
+
 For your information it took 2hours to compute on a casual laptop (2022).
 
 You can modify the auto_encoder.py file in order to use another data set (line 35) or modify the number of epochs (line 129).

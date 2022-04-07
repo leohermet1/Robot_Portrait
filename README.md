@@ -19,9 +19,6 @@ pip3 install pipenv
 # Activate Python virtualenv
 pipenv shell
 pipenv install -r ./requirements.txt
-# Extract image dataset
-cd robot_portrait/
-gzip -d celebA_10000.zip
 # Run 
 python3 main.py
 ```
@@ -41,18 +38,21 @@ DEPENDENCIES:
 
 #### Run
 ```
-cd robot_portrait/
-gzip -d celebA_10000.zip (The datasets of pictures)
 python3 main.py
 ```
 
 ## auto_encoder
-If you want to re-train the model, you can run the auto_encoder.py with this code:
+In order to train the model proposed here we used : 
+  - 10000 pictures from the celebA dataset https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html 
+  - 50 epochs
+For your information it took 2hours to compute on a casual laptop (2022).
+
+You can modify the auto_encoder.py file in order to use another data set (line ) or modify the number of epochs (line 129).
+Then you can retrain the model by running :
 ```
 python3 auto_encoder.py
 ```
-In this code you can modify the number of epochs at the line 129.
-
+It will automatically save your model and use it next time you run the main.py
 
 ## Authors
 Beugin Maëva, Dufeu Marion, Cho Chaeeun, Hermet Léo, Li Danlin, Jimenez Juan

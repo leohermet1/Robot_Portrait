@@ -13,11 +13,16 @@ $ git clone https://github.com/leohermet1/Robot_Portrait.git
 $ cd robot_portrait/
 $ gzip -d celebA_10000.zip (The datasets of pictures)
 
-### Make sure that you have all the following packages on your computer:
+### To use Python Virtual Environment
+Activate your virtual environement and install the dependencies using the `requirements.txt` file:
+```
+pip3 install -r requirements.txt
+``` 
+
+### If you don't want to use a Python Virtual Environment, make sure that you have all the following packages on your computer:
 DEPENDENCIES:
 + `pip3 install tkinter`
-+ `pip3 install turtle`
-+ `pip3 install PIL` (or pillow)
++ `pip3 install Pillow`
 + `pip3 install keras`
 + `pip3 install tensorflow`
 + `pip3 install numpy`
@@ -27,12 +32,32 @@ DEPENDENCIES:
 + `pip3 install pickle`
 + `pip3 install random`
 
-$ python3 main.py
+## Run
+```
+cd robot_portrait
+python3 main.py
+```
 
 ### auto_encoder
 If you want to re-train the model, you can run the auto_encoder.py with this code:
 $ python3 auto_encoder.py
 In this code you can modify the number of epochs at the line 129.
 
+All instructions to run this project:
+
+```
+# Clone repo
+git clone https://github.com/leohermet1/Robot_Portrait.git
+cd Robot_Portrait/
+# Activate Python virtualenv
+pipenv shell
+pipenv install -r ./requirements.txt
+# Extract image dataset
+cd robot_portrait/
+gzip -d celebA_10000.zip
+# Run 
+python3 main.py
+```
 ## Authors
 Beugin Maëva, Dufeu Marion, Cho Chaeeun, Hermet Léo, Li Danlin, Jimenez Juan
+

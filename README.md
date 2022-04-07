@@ -47,7 +47,7 @@ In order to train the model proposed here we used :
   - 50 epochs
 For your information it took 2hours to compute on a casual laptop (2022).
 
-You can modify the auto_encoder.py file in order to use another data set (line ) or modify the number of epochs (line 129).
+You can modify the auto_encoder.py file in order to use another data set (line 35) or modify the number of epochs (line 129).
 Then you can retrain the model by running :
 ```
 python3 auto_encoder.py
@@ -55,4 +55,4 @@ python3 auto_encoder.py
 It will automatically save your model and use it next time you run the main.py
 
 ## Authors
-Beugin Maëva, Dufeu Marion, Cho Chaeeun, Hermet Léo, Li Danlin, Jimenez Juan
+Beugin Maëva, Dufeu Marion, Cho Chaeeun, Li Danlin, Jimenez Juan, Hermet Léo

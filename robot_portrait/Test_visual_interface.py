@@ -404,8 +404,6 @@ def visualInterface(encodedVectors, decoderModel, popCreated, indexPop, randomse
             canvas9["bg"]="#B5EAD7"
     canvas9.bind("<Button-1>", clavier9)
     canvas9.grid(row=7, column=3)
-
-    window.resizable(False, False)#to avoid that the user resize the window 
     
     window.mainloop()
 

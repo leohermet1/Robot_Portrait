@@ -20,6 +20,7 @@ pip3 install pipenv
 pipenv shell
 pipenv install -r ./requirements.txt
 # Run 
+cd robot_portrait/
 python3 main.py
 ```
 

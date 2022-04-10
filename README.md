@@ -62,7 +62,7 @@ Robot_Portrait/robot_portrait/docs/build/html
 ```
 in your files and then click on the file 
 ```
-index.htlm. 
+index.htlm 
 ```
 It should open your web browser directly on the first of the documentation. You then just have to navigate inside to discover everything you need!
 

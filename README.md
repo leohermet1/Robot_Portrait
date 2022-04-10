@@ -55,5 +55,12 @@ python3 auto_encoder.py
 ```
 It will automatically save your model and use it next time you run the main.py
 
+## Documentations
+To find all our documentation, you can either read directly the docstrings in the code of go to
+```
+Robot_Portrait/robot_portrait/docs/build/html
+```
+and then click on the file index.htlm. It should open your web browser directly on the first of the documentation. You then just have to navigate inside to discover everything you need!
+
 ## Authors
 Beugin Maëva, Dufeu Marion, Cho Chaeeun, Li Danlin, Jimenez Juan, Hermet Léo

@@ -60,7 +60,11 @@ To find all our documentation, you can either read directly the docstrings in th
 ```
 Robot_Portrait/robot_portrait/docs/build/html
 ```
-and then click on the file index.htlm. It should open your web browser directly on the first of the documentation. You then just have to navigate inside to discover everything you need!
+in your files and then click on the file 
+```
+index.htlm. 
+```
+It should open your web browser directly on the first of the documentation. You then just have to navigate inside to discover everything you need!
 
 ## Authors
 Beugin Maëva, Dufeu Marion, Cho Chaeeun, Li Danlin, Jimenez Juan, Hermet Léo

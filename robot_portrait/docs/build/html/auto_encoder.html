@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>auto_encoder module &#8212; Robot_Portrait_Group_1 1.0.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="decoder module" href="decoder.html" />
+    <link rel="prev" title="Test_visual_interface module" href="Test_visual_interface.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-auto_encoder">
+<span id="auto-encoder-module"></span><h1>auto_encoder module<a class="headerlink" href="#module-auto_encoder" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="auto_encoder.auto_encoder">
+<span class="sig-prename descclassname"><span class="pre">auto_encoder.</span></span><span class="sig-name descname"><span class="pre">auto_encoder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#auto_encoder.auto_encoder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the encoded pictures and the decoded pictures with the models</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>No parameters</p>
+</dd>
+<dt>Returns:</dt><dd><p>encoded, reconstructed(numpy.array) : Numpy array of the pixels of the encoded pictures and the decoded pictures</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="auto_encoder.creat_train_data">
+<span class="sig-prename descclassname"><span class="pre">auto_encoder.</span></span><span class="sig-name descname"><span class="pre">creat_train_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">celebA</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#auto_encoder.creat_train_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the training part and the testing part of data of the pictures which will be used to train the model after</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>celebA (numpy.array) : Numpy array of the pixels of each picture in the file</p>
+</dd>
+<dt>Returns:</dt><dd><p>X_train, X_test (numpy.array): Numpy array of the pictures of the training part and testing part</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="auto_encoder.get_models">
+<span class="sig-prename descclassname"><span class="pre">auto_encoder.</span></span><span class="sig-name descname"><span class="pre">get_models</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#auto_encoder.get_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the autoencoder and decoder model (dercoder model with the same layers with that of autoencoder)</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>No parameters</p>
+</dd>
+<dt>Returns:</dt><dd><p>X_d ,X_AE (model) : autoencoder and decoder model</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="auto_encoder.get_pictures">
+<span class="sig-prename descclassname"><span class="pre">auto_encoder.</span></span><span class="sig-name descname"><span class="pre">get_pictures</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#auto_encoder.get_pictures" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a numpy array of the pixels of all the pictures</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>file_str(string) : String of the directory towards the file containing all the celebA pictures</p>
+</dd>
+<dt>Returns:</dt><dd><p>celebA (numpy.array): Numpy array of the pixels of each picture in the file</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="auto_encoder.train_autoencoder_model">
+<span class="sig-prename descclassname"><span class="pre">auto_encoder.</span></span><span class="sig-name descname"><span class="pre">train_autoencoder_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X_train</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X_test</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#auto_encoder.train_autoencoder_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the trained autoencoder with our pictures</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters:</dt><dd><p>X_train, X_test(numpy.array) : Numpy array of the pictures of the training part and testing part</p>
+</dd>
+<dt>Returns:</dt><dd><p>X_AE (model) : trained autoencoder(decoder is trained automatically within the training of autoencoder)</p>
+</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Robot_Portrait_Group_1</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="GA.html">GA module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Test_visual_interface.html">Test_visual_interface module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">auto_encoder module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decoder.html">decoder module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="main.html">main module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">packages</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="GA.html">GA module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Test_visual_interface.html">Test_visual_interface module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">auto_encoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="decoder.html">decoder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main.html">main module</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Test_visual_interface.html" title="previous chapter">Test_visual_interface module</a></li>
+      <li>Next: <a href="decoder.html" title="next chapter">decoder module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Beugin, Cho, Dufeu, Hermer, Jimenez, Li.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.2.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/auto_encoder.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

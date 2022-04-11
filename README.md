@@ -32,10 +32,7 @@ DEPENDENCIES:
 + `pip3 install tensorflow`
 + `pip3 install numpy`
 + `pip3 install sklearn.model_selection`
-+ `pip3 install math`
-+ `pip3 install base64`
 + `pip3 install pickle`
-+ `pip3 install random`
 
 #### Run
 ```
